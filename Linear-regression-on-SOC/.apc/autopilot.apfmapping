@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="header.hpp" path="D:\Aeld_data\IP_Creation\Linear-regression-on-SOC\Linear-regression-on-SOC\header.hpp"/>
+    <originFiles name="source.cpp" path="D:\Aeld_data\IP_Creation\Linear-regression-on-SOC\Linear-regression-on-SOC\source.cpp"/>
+  </source>
+  <testbench>
+    <originFiles name="test.cpp" path="D:\Aeld_data\IP_Creation\Linear-regression-on-SOC\Linear-regression-on-SOC\test.cpp"/>
+  </testbench>
+</autopilotfilemapping:AutoPilotFileMapping>

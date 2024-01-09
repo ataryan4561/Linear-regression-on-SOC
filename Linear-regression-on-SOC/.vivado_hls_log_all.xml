@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vivadoHLSLog:LogRoot xmlns:vivadoHLSLog="www.xilinx.com/vivadoHLSLog">
+  <errorLogs>
+    <logs>
+      <synLog/>
+      <simLog/>
+      <mgLog/>
+      <packageLog/>
+      <csimLog/>
+    </logs>
+  </errorLogs>
+  <warningLogs>
+    <logs>
+      <synLog>
+        <logs message="WARNING: [SYN 201-107] Renaming port name 'linear_regression/output' to 'linear_regression/output_r' to avoid the conflict with HDL keywords or other object names." projectName="Linear-regression-on-SOC" solutionName="solution1" date="2024-01-09T23:44:47.511+0530" type="Warning"/>
+        <logs message="WARNING: [SYN 201-107] Renaming port name 'linear_regression/input' to 'linear_regression/input_r' to avoid the conflict with HDL keywords or other object names." projectName="Linear-regression-on-SOC" solutionName="solution1" date="2024-01-09T23:44:47.495+0530" type="Warning"/>
+        <logs message="WARNING: [HLS 200-466] Port 'output'() has different latency/depth on the same m_axi bundle:'gmem'" projectName="Linear-regression-on-SOC" solutionName="solution1" date="2024-01-09T23:44:46.724+0530" type="Warning"/>
+      </synLog>
+      <simLog/>
+      <mgLog/>
+      <packageLog/>
+      <csimLog/>
+    </logs>
+  </warningLogs>
+</vivadoHLSLog:LogRoot>

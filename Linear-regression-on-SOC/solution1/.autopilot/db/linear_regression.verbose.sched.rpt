@@ -1,0 +1,1080 @@
+
+
+================================================================
+== Vivado HLS Report for 'linear_regression'
+================================================================
+* Date:           Tue Jan  9 23:44:48 2024
+
+* Version:        2019.1 (Build 2552052 on Fri May 24 15:28:33 MDT 2019)
+* Project:        Linear-regression-on-SOC
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020-clg484-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|     8.750|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +---------+---------+---------+---------+---------+
+    |      Latency      |      Interval     | Pipeline|
+    |   min   |   max   |   min   |   max   |   Type  |
+    +---------+---------+---------+---------+---------+
+    |  3245494|  3245494|  3245494|  3245494|   none  |
+    +---------+---------+---------+---------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +---------------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                           |      Latency      | Iteration|  Initiation Interval  | Trip |          |
+        |         Loop Name         |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +---------------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- memcpy.x_input.input     |      195|      195|         3|          1|          1|   194|    yes   |
+        |- memset_theta             |        1|        1|         1|          -|          -|     2|    no    |
+        |- memset_data              |      290|      290|         3|          -|          -|    97|    no    |
+        | + memset_data             |        1|        1|         1|          -|          -|     2|    no    |
+        |- memset_data1             |      195|      195|        98|          -|          -|     2|    no    |
+        | + memset_data1            |       96|       96|         1|          -|          -|    97|    no    |
+        |- memset_y                 |       96|       96|         1|          -|          -|    97|    no    |
+        |- Loop 6                   |      194|      194|         2|          -|          -|    97|    no    |
+        |- Loop 7                   |  3244500|  3244500|      2163|          -|          -|  1500|    no    |
+        | + Loop 7.1                |     1067|     1067|        11|          -|          -|    97|    no    |
+        | + Loop 7.2                |     1067|     1067|        11|          -|          -|    97|    no    |
+        |- memcpy.output.theta.gep  |        2|        2|         2|          1|          1|     2|    yes   |
+        +---------------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 1
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 3
+  * Pipeline-1: initiation interval (II) = 1, depth = 2
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 76
+* Pipeline : 2
+  Pipeline-0 : II = 1, D = 3, States = { 9 10 11 }
+  Pipeline-1 : II = 1, D = 2, States = { 70 71 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 4 
+4 --> 5 
+5 --> 6 
+6 --> 7 
+7 --> 8 
+8 --> 9 
+9 --> 12 10 
+10 --> 11 
+11 --> 9 
+12 --> 13 
+13 --> 13 14 
+14 --> 15 
+15 --> 15 14 16 
+16 --> 17 
+17 --> 17 16 18 
+18 --> 18 19 
+19 --> 20 21 
+20 --> 19 
+21 --> 22 70 
+22 --> 23 33 
+23 --> 24 
+24 --> 25 
+25 --> 26 
+26 --> 27 
+27 --> 28 
+28 --> 29 
+29 --> 30 
+30 --> 31 
+31 --> 32 
+32 --> 22 
+33 --> 34 44 
+34 --> 35 
+35 --> 36 
+36 --> 37 
+37 --> 38 
+38 --> 39 
+39 --> 40 
+40 --> 41 
+41 --> 42 
+42 --> 43 
+43 --> 33 
+44 --> 45 
+45 --> 46 
+46 --> 47 
+47 --> 48 
+48 --> 49 
+49 --> 50 
+50 --> 51 
+51 --> 52 
+52 --> 53 
+53 --> 54 
+54 --> 55 
+55 --> 56 
+56 --> 57 
+57 --> 58 
+58 --> 59 
+59 --> 60 
+60 --> 61 
+61 --> 62 
+62 --> 63 
+63 --> 64 
+64 --> 65 
+65 --> 66 
+66 --> 67 
+67 --> 68 
+68 --> 69 
+69 --> 21 
+70 --> 72 71 
+71 --> 70 
+72 --> 73 
+73 --> 74 
+74 --> 75 
+75 --> 76 
+76 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 1.00>
+ST_1 : Operation 77 [1/1] (1.00ns)   --->   "%output_read = call i32 @_ssdm_op_Read.s_axilite.i32(i32 %output_r)"   --->   Operation 77 'read' 'output_read' <Predicate = true> <Delay = 1.00> <Core = "s_axilite">   --->   Core 10 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
+ST_1 : Operation 78 [1/1] (1.00ns)   --->   "%input_read = call i32 @_ssdm_op_Read.s_axilite.i32(i32 %input_r)"   --->   Operation 78 'read' 'input_read' <Predicate = true> <Delay = 1.00> <Core = "s_axilite">   --->   Core 10 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
+ST_1 : Operation 79 [1/1] (0.00ns)   --->   "%output3 = call i30 @_ssdm_op_PartSelect.i30.i32.i32.i32(i32 %output_read, i32 2, i32 31)"   --->   Operation 79 'partselect' 'output3' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 80 [1/1] (0.00ns)   --->   "%input1 = call i30 @_ssdm_op_PartSelect.i30.i32.i32.i32(i32 %input_read, i32 2, i32 31)"   --->   Operation 80 'partselect' 'input1' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 81 [1/1] (0.00ns)   --->   "%x_input = alloca [194 x float], align 16" [Linear-regression-on-SOC/source.cpp:7]   --->   Operation 81 'alloca' 'x_input' <Predicate = true> <Delay = 0.00> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_1 : Operation 82 [1/1] (0.00ns)   --->   "%data = alloca [194 x float], align 4" [Linear-regression-on-SOC/source.cpp:12]   --->   Operation 82 'alloca' 'data' <Predicate = true> <Delay = 0.00> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_1 : Operation 83 [1/1] (0.00ns)   --->   "%data1 = alloca [194 x float], align 4" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 83 'alloca' 'data1' <Predicate = true> <Delay = 0.00> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_1 : Operation 84 [1/1] (0.00ns)   --->   "%y = alloca [97 x float], align 16" [Linear-regression-on-SOC/source.cpp:14]   --->   Operation 84 'alloca' 'y' <Predicate = true> <Delay = 0.00> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+
+State 2 <SV = 1> <Delay = 8.75>
+ST_2 : Operation 85 [1/1] (0.00ns)   --->   "%empty_5 = zext i30 %input1 to i64"   --->   Operation 85 'zext' 'empty_5' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 86 [1/1] (0.00ns)   --->   "%gmem_addr_1 = getelementptr float* %gmem, i64 %empty_5"   --->   Operation 86 'getelementptr' 'gmem_addr_1' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 87 [7/7] (8.75ns)   --->   "%gmem_addr_1_rd_req = call i1 @_ssdm_op_ReadReq.m_axi.floatP(float* %gmem_addr_1, i32 194)" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 87 'readreq' 'gmem_addr_1_rd_req' <Predicate = true> <Delay = 8.75> <Core = "m_axi">   --->   Core 9 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 3 <SV = 2> <Delay = 8.75>
+ST_3 : Operation 88 [6/7] (8.75ns)   --->   "%gmem_addr_1_rd_req = call i1 @_ssdm_op_ReadReq.m_axi.floatP(float* %gmem_addr_1, i32 194)" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 88 'readreq' 'gmem_addr_1_rd_req' <Predicate = true> <Delay = 8.75> <Core = "m_axi">   --->   Core 9 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 4 <SV = 3> <Delay = 8.75>
+ST_4 : Operation 89 [5/7] (8.75ns)   --->   "%gmem_addr_1_rd_req = call i1 @_ssdm_op_ReadReq.m_axi.floatP(float* %gmem_addr_1, i32 194)" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 89 'readreq' 'gmem_addr_1_rd_req' <Predicate = true> <Delay = 8.75> <Core = "m_axi">   --->   Core 9 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 5 <SV = 4> <Delay = 8.75>
+ST_5 : Operation 90 [4/7] (8.75ns)   --->   "%gmem_addr_1_rd_req = call i1 @_ssdm_op_ReadReq.m_axi.floatP(float* %gmem_addr_1, i32 194)" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 90 'readreq' 'gmem_addr_1_rd_req' <Predicate = true> <Delay = 8.75> <Core = "m_axi">   --->   Core 9 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 6 <SV = 5> <Delay = 8.75>
+ST_6 : Operation 91 [3/7] (8.75ns)   --->   "%gmem_addr_1_rd_req = call i1 @_ssdm_op_ReadReq.m_axi.floatP(float* %gmem_addr_1, i32 194)" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 91 'readreq' 'gmem_addr_1_rd_req' <Predicate = true> <Delay = 8.75> <Core = "m_axi">   --->   Core 9 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 7 <SV = 6> <Delay = 8.75>
+ST_7 : Operation 92 [2/7] (8.75ns)   --->   "%gmem_addr_1_rd_req = call i1 @_ssdm_op_ReadReq.m_axi.floatP(float* %gmem_addr_1, i32 194)" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 92 'readreq' 'gmem_addr_1_rd_req' <Predicate = true> <Delay = 8.75> <Core = "m_axi">   --->   Core 9 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 8 <SV = 7> <Delay = 8.75>
+ST_8 : Operation 93 [1/1] (0.00ns)   --->   "%empty = zext i30 %output3 to i64"   --->   Operation 93 'zext' 'empty' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 94 [1/1] (0.00ns)   --->   "%gmem_addr = getelementptr float* %gmem, i64 %empty"   --->   Operation 94 'getelementptr' 'gmem_addr' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 95 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecBitsMap(float* %gmem), !map !17"   --->   Operation 95 'specbitsmap' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 96 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecTopModule([18 x i8]* @linear_regression_st) nounwind"   --->   Operation 96 'spectopmodule' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 97 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i32 0, [10 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str1, i32 0, i32 0, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1, [1 x i8]* @p_str1) nounwind" [Linear-regression-on-SOC/source.cpp:4]   --->   Operation 97 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 98 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(float* %gmem, [6 x i8]* @p_str2, i32 0, i32 0, [1 x i8]* @p_str1, i32 0, i32 194, [5 x i8]* @p_str3, [6 x i8]* @p_str4, [1 x i8]* @p_str1, i32 16, i32 16, i32 16, i32 16, [1 x i8]* @p_str1, [1 x i8]* @p_str1) nounwind" [Linear-regression-on-SOC/source.cpp:5]   --->   Operation 98 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 99 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i32 %input_r, [10 x i8]* @mode, i32 0, i32 0, [1 x i8]* @p_str1, i32 0, i32 194, [1 x i8]* @bundle, [6 x i8]* @p_str4, [1 x i8]* @p_str1, i32 16, i32 16, i32 16, i32 16, [1 x i8]* @p_str1, [1 x i8]* @p_str1) nounwind" [Linear-regression-on-SOC/source.cpp:5]   --->   Operation 99 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 100 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i32 %output_r, [10 x i8]* @mode1, i32 0, i32 0, [1 x i8]* @p_str1, i32 0, i32 2, [1 x i8]* @bundle2, [6 x i8]* @p_str4, [1 x i8]* @p_str1, i32 16, i32 16, i32 16, i32 16, [1 x i8]* @p_str1, [1 x i8]* @p_str1) nounwind" [Linear-regression-on-SOC/source.cpp:6]   --->   Operation 100 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 101 [1/7] (8.75ns)   --->   "%gmem_addr_1_rd_req = call i1 @_ssdm_op_ReadReq.m_axi.floatP(float* %gmem_addr_1, i32 194)" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 101 'readreq' 'gmem_addr_1_rd_req' <Predicate = true> <Delay = 8.75> <Core = "m_axi">   --->   Core 9 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_8 : Operation 102 [1/1] (1.76ns)   --->   "br label %burst.rd.header" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 102 'br' <Predicate = true> <Delay = 1.76>
+
+State 9 <SV = 8> <Delay = 1.91>
+ST_9 : Operation 103 [1/1] (0.00ns)   --->   "%phi_ln8 = phi i8 [ 0, %0 ], [ %add_ln8, %burstread.region ]" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 103 'phi' 'phi_ln8' <Predicate = true> <Delay = 0.00>
+ST_9 : Operation 104 [1/1] (1.55ns)   --->   "%icmp_ln8 = icmp eq i8 %phi_ln8, -62" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 104 'icmp' 'icmp_ln8' <Predicate = true> <Delay = 1.55> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.48> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_9 : Operation 105 [1/1] (0.00ns)   --->   "%empty_6 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 194, i64 194, i64 194) nounwind"   --->   Operation 105 'speclooptripcount' 'empty_6' <Predicate = true> <Delay = 0.00>
+ST_9 : Operation 106 [1/1] (1.91ns)   --->   "%add_ln8 = add i8 %phi_ln8, 1" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 106 'add' 'add_ln8' <Predicate = true> <Delay = 1.91> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_9 : Operation 107 [1/1] (0.00ns)   --->   "br i1 %icmp_ln8, label %meminst.preheader, label %burstread.region" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 107 'br' <Predicate = true> <Delay = 0.00>
+
+State 10 <SV = 9> <Delay = 8.75>
+ST_10 : Operation 108 [1/1] (8.75ns)   --->   "%gmem_addr_1_read = call float @_ssdm_op_Read.m_axi.floatP(float* %gmem_addr_1)" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 108 'read' 'gmem_addr_1_read' <Predicate = (!icmp_ln8)> <Delay = 8.75> <Core = "m_axi">   --->   Core 9 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 11 <SV = 10> <Delay = 3.25>
+ST_11 : Operation 109 [1/1] (0.00ns)   --->   "%burstread_rbegin = call i32 (...)* @_ssdm_op_SpecRegionBegin([17 x i8]* @burstread_OC_region_s) nounwind" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 109 'specregionbegin' 'burstread_rbegin' <Predicate = (!icmp_ln8)> <Delay = 0.00>
+ST_11 : Operation 110 [1/1] (0.00ns)   --->   "%empty_7 = call i32 (...)* @_ssdm_op_SpecPipeline(i32 1, i32 1, i32 1, i32 0, [1 x i8]* @p_str5) nounwind" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 110 'specpipeline' 'empty_7' <Predicate = (!icmp_ln8)> <Delay = 0.00>
+ST_11 : Operation 111 [1/1] (0.00ns)   --->   "%empty_8 = call i32 (...)* @_ssdm_op_SpecLoopName([21 x i8]* @memcpy_OC_x_input_OC) nounwind" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 111 'specloopname' 'empty_8' <Predicate = (!icmp_ln8)> <Delay = 0.00>
+ST_11 : Operation 112 [1/1] (0.00ns)   --->   "%zext_ln8 = zext i8 %phi_ln8 to i64" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 112 'zext' 'zext_ln8' <Predicate = (!icmp_ln8)> <Delay = 0.00>
+ST_11 : Operation 113 [1/1] (0.00ns)   --->   "%x_input_addr = getelementptr [194 x float]* %x_input, i64 0, i64 %zext_ln8" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 113 'getelementptr' 'x_input_addr' <Predicate = (!icmp_ln8)> <Delay = 0.00>
+ST_11 : Operation 114 [1/1] (3.25ns)   --->   "store float %gmem_addr_1_read, float* %x_input_addr, align 4" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 114 'store' <Predicate = (!icmp_ln8)> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_11 : Operation 115 [1/1] (0.00ns)   --->   "%burstread_rend = call i32 (...)* @_ssdm_op_SpecRegionEnd([17 x i8]* @burstread_OC_region_s, i32 %burstread_rbegin) nounwind" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 115 'specregionend' 'burstread_rend' <Predicate = (!icmp_ln8)> <Delay = 0.00>
+ST_11 : Operation 116 [1/1] (0.00ns)   --->   "br label %burst.rd.header" [Linear-regression-on-SOC/source.cpp:8]   --->   Operation 116 'br' <Predicate = (!icmp_ln8)> <Delay = 0.00>
+
+State 12 <SV = 9> <Delay = 1.76>
+ST_12 : Operation 117 [1/1] (0.00ns)   --->   "%theta_0_0 = alloca float"   --->   Operation 117 'alloca' 'theta_0_0' <Predicate = true> <Delay = 0.00>
+ST_12 : Operation 118 [1/1] (0.00ns)   --->   "%theta_1_0 = alloca float"   --->   Operation 118 'alloca' 'theta_1_0' <Predicate = true> <Delay = 0.00>
+ST_12 : Operation 119 [1/1] (1.76ns)   --->   "br label %meminst" [Linear-regression-on-SOC/source.cpp:11]   --->   Operation 119 'br' <Predicate = true> <Delay = 1.76>
+
+State 13 <SV = 10> <Delay = 1.76>
+ST_13 : Operation 120 [1/1] (0.00ns)   --->   "%phi_ln11 = phi i1 [ %xor_ln11, %meminst ], [ false, %meminst.preheader ]" [Linear-regression-on-SOC/source.cpp:11]   --->   Operation 120 'phi' 'phi_ln11' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 121 [1/1] (0.00ns)   --->   "%theta_0_0_load = load float* %theta_0_0" [Linear-regression-on-SOC/source.cpp:11]   --->   Operation 121 'load' 'theta_0_0_load' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 122 [1/1] (0.00ns)   --->   "%theta_1_0_load = load float* %theta_1_0" [Linear-regression-on-SOC/source.cpp:11]   --->   Operation 122 'load' 'theta_1_0_load' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 123 [1/1] (0.97ns)   --->   "%xor_ln11 = xor i1 %phi_ln11, true" [Linear-regression-on-SOC/source.cpp:11]   --->   Operation 123 'xor' 'xor_ln11' <Predicate = true> <Delay = 0.97> <Core = "LogicGate">   --->   Core 27 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.97> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_13 : Operation 124 [1/1] (0.69ns)   --->   "%select_ln11 = select i1 %phi_ln11, float 0.000000e+00, float %theta_1_0_load" [Linear-regression-on-SOC/source.cpp:11]   --->   Operation 124 'select' 'select_ln11' <Predicate = true> <Delay = 0.69> <Core = "Sel">   --->   Core 26 'Sel' <Latency = 0> <II = 1> <Delay = 0.69> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_13 : Operation 125 [1/1] (0.69ns)   --->   "%select_ln11_1 = select i1 %phi_ln11, float %theta_0_0_load, float 0.000000e+00" [Linear-regression-on-SOC/source.cpp:11]   --->   Operation 125 'select' 'select_ln11_1' <Predicate = true> <Delay = 0.69> <Core = "Sel">   --->   Core 26 'Sel' <Latency = 0> <II = 1> <Delay = 0.69> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_13 : Operation 126 [1/1] (0.00ns)   --->   "%empty_9 = call i32 (...)* @_ssdm_op_SpecLoopName([13 x i8]* @memset_theta_str) nounwind"   --->   Operation 126 'specloopname' 'empty_9' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 127 [1/1] (0.00ns)   --->   "%empty_10 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 2, i64 2, i64 2) nounwind"   --->   Operation 127 'speclooptripcount' 'empty_10' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 128 [1/1] (0.00ns)   --->   "store float %select_ln11, float* %theta_1_0" [Linear-regression-on-SOC/source.cpp:11]   --->   Operation 128 'store' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 129 [1/1] (0.00ns)   --->   "store float %select_ln11_1, float* %theta_0_0" [Linear-regression-on-SOC/source.cpp:11]   --->   Operation 129 'store' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 130 [1/1] (0.00ns)   --->   "br i1 %phi_ln11, label %meminst6.preheader, label %meminst" [Linear-regression-on-SOC/source.cpp:11]   --->   Operation 130 'br' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 131 [1/1] (1.76ns)   --->   "br label %meminst6" [Linear-regression-on-SOC/source.cpp:12]   --->   Operation 131 'br' <Predicate = (phi_ln11)> <Delay = 1.76>
+
+State 14 <SV = 11> <Delay = 1.87>
+ST_14 : Operation 132 [1/1] (0.00ns)   --->   "%phi_ln12 = phi i7 [ %add_ln12, %meminst69 ], [ 0, %meminst6.preheader ]" [Linear-regression-on-SOC/source.cpp:12]   --->   Operation 132 'phi' 'phi_ln12' <Predicate = true> <Delay = 0.00>
+ST_14 : Operation 133 [1/1] (1.87ns)   --->   "%add_ln12 = add i7 %phi_ln12, 1" [Linear-regression-on-SOC/source.cpp:12]   --->   Operation 133 'add' 'add_ln12' <Predicate = true> <Delay = 1.87> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_14 : Operation 134 [1/1] (0.00ns)   --->   "%empty_11 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 97, i64 97, i64 97) nounwind"   --->   Operation 134 'speclooptripcount' 'empty_11' <Predicate = true> <Delay = 0.00>
+ST_14 : Operation 135 [1/1] (1.76ns)   --->   "br label %meminst10"   --->   Operation 135 'br' <Predicate = true> <Delay = 1.76>
+
+State 15 <SV = 12> <Delay = 3.44>
+ST_15 : Operation 136 [1/1] (0.00ns)   --->   "%phi_ln12_1 = phi i1 [ false, %meminst6 ], [ %xor_ln12, %meminst10 ]" [Linear-regression-on-SOC/source.cpp:12]   --->   Operation 136 'phi' 'phi_ln12_1' <Predicate = true> <Delay = 0.00>
+ST_15 : Operation 137 [1/1] (0.97ns)   --->   "%xor_ln12 = xor i1 %phi_ln12_1, true" [Linear-regression-on-SOC/source.cpp:12]   --->   Operation 137 'xor' 'xor_ln12' <Predicate = true> <Delay = 0.97> <Core = "LogicGate">   --->   Core 27 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.97> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_15 : Operation 138 [1/1] (0.00ns)   --->   "%tmp = call i8 @_ssdm_op_BitConcatenate.i8.i7.i1(i7 %phi_ln12, i1 %phi_ln12_1)" [Linear-regression-on-SOC/source.cpp:12]   --->   Operation 138 'bitconcatenate' 'tmp' <Predicate = true> <Delay = 0.00>
+ST_15 : Operation 139 [1/1] (0.00ns)   --->   "%zext_ln12 = zext i8 %tmp to i64" [Linear-regression-on-SOC/source.cpp:12]   --->   Operation 139 'zext' 'zext_ln12' <Predicate = true> <Delay = 0.00>
+ST_15 : Operation 140 [1/1] (0.00ns)   --->   "%data_addr = getelementptr [194 x float]* %data, i64 0, i64 %zext_ln12" [Linear-regression-on-SOC/source.cpp:12]   --->   Operation 140 'getelementptr' 'data_addr' <Predicate = true> <Delay = 0.00>
+ST_15 : Operation 141 [1/1] (3.25ns)   --->   "store float 0.000000e+00, float* %data_addr, align 4" [Linear-regression-on-SOC/source.cpp:12]   --->   Operation 141 'store' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_15 : Operation 142 [1/1] (0.00ns)   --->   "%empty_12 = call i32 (...)* @_ssdm_op_SpecLoopName([12 x i8]* @memset_data_str) nounwind"   --->   Operation 142 'specloopname' 'empty_12' <Predicate = true> <Delay = 0.00>
+ST_15 : Operation 143 [1/1] (0.00ns)   --->   "%empty_13 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 2, i64 2, i64 2) nounwind"   --->   Operation 143 'speclooptripcount' 'empty_13' <Predicate = true> <Delay = 0.00>
+ST_15 : Operation 144 [1/1] (0.00ns)   --->   "br i1 %phi_ln12_1, label %meminst69, label %meminst10" [Linear-regression-on-SOC/source.cpp:12]   --->   Operation 144 'br' <Predicate = true> <Delay = 0.00>
+ST_15 : Operation 145 [1/1] (1.48ns)   --->   "%icmp_ln12 = icmp eq i7 %phi_ln12, -32" [Linear-regression-on-SOC/source.cpp:12]   --->   Operation 145 'icmp' 'icmp_ln12' <Predicate = (phi_ln12_1)> <Delay = 1.48> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.48> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_15 : Operation 146 [1/1] (0.00ns)   --->   "%empty_14 = call i32 (...)* @_ssdm_op_SpecLoopName([12 x i8]* @memset_data_str) nounwind"   --->   Operation 146 'specloopname' 'empty_14' <Predicate = (phi_ln12_1)> <Delay = 0.00>
+ST_15 : Operation 147 [1/1] (0.00ns)   --->   "br i1 %icmp_ln12, label %meminst13.preheader, label %meminst6" [Linear-regression-on-SOC/source.cpp:12]   --->   Operation 147 'br' <Predicate = (phi_ln12_1)> <Delay = 0.00>
+ST_15 : Operation 148 [1/1] (1.76ns)   --->   "br label %meminst13" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 148 'br' <Predicate = (phi_ln12_1 & icmp_ln12)> <Delay = 1.76>
+
+State 16 <SV = 13> <Delay = 1.87>
+ST_16 : Operation 149 [1/1] (0.00ns)   --->   "%phi_ln13 = phi i1 [ %xor_ln13, %meminst1316 ], [ false, %meminst13.preheader ]" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 149 'phi' 'phi_ln13' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 150 [1/1] (0.00ns)   --->   "%phi_mul = phi i7 [ %add_ln13_3, %meminst1316 ], [ 0, %meminst13.preheader ]" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 150 'phi' 'phi_mul' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 151 [1/1] (0.00ns)   --->   "%zext_ln13 = zext i7 %phi_mul to i8" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 151 'zext' 'zext_ln13' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 152 [1/1] (1.87ns)   --->   "%add_ln13_3 = add i7 %phi_mul, -31" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 152 'add' 'add_ln13_3' <Predicate = true> <Delay = 1.87> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_16 : Operation 153 [1/1] (0.97ns)   --->   "%xor_ln13 = xor i1 %phi_ln13, true" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 153 'xor' 'xor_ln13' <Predicate = true> <Delay = 0.97> <Core = "LogicGate">   --->   Core 27 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.97> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_16 : Operation 154 [1/1] (0.00ns)   --->   "%empty_15 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 2, i64 2, i64 2) nounwind"   --->   Operation 154 'speclooptripcount' 'empty_15' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 155 [1/1] (1.76ns)   --->   "br label %meminst17"   --->   Operation 155 'br' <Predicate = true> <Delay = 1.76>
+
+State 17 <SV = 14> <Delay = 5.12>
+ST_17 : Operation 156 [1/1] (0.00ns)   --->   "%phi_ln13_1 = phi i7 [ 0, %meminst13 ], [ %add_ln13_1, %meminst17 ]" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 156 'phi' 'phi_ln13_1' <Predicate = true> <Delay = 0.00>
+ST_17 : Operation 157 [1/1] (1.87ns)   --->   "%add_ln13_1 = add i7 %phi_ln13_1, 1" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 157 'add' 'add_ln13_1' <Predicate = true> <Delay = 1.87> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_17 : Operation 158 [1/1] (0.00ns)   --->   "%zext_ln13_1 = zext i7 %phi_ln13_1 to i8" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 158 'zext' 'zext_ln13_1' <Predicate = true> <Delay = 0.00>
+ST_17 : Operation 159 [1/1] (1.87ns)   --->   "%add_ln13_2 = add i8 %zext_ln13, %zext_ln13_1" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 159 'add' 'add_ln13_2' <Predicate = true> <Delay = 1.87> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_17 : Operation 160 [1/1] (0.00ns)   --->   "%zext_ln13_2 = zext i8 %add_ln13_2 to i64" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 160 'zext' 'zext_ln13_2' <Predicate = true> <Delay = 0.00>
+ST_17 : Operation 161 [1/1] (0.00ns)   --->   "%data1_addr = getelementptr [194 x float]* %data1, i64 0, i64 %zext_ln13_2" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 161 'getelementptr' 'data1_addr' <Predicate = true> <Delay = 0.00>
+ST_17 : Operation 162 [1/1] (3.25ns)   --->   "store float 0.000000e+00, float* %data1_addr, align 4" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 162 'store' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_17 : Operation 163 [1/1] (1.48ns)   --->   "%icmp_ln13 = icmp eq i7 %phi_ln13_1, -32" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 163 'icmp' 'icmp_ln13' <Predicate = true> <Delay = 1.48> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.48> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_17 : Operation 164 [1/1] (0.00ns)   --->   "%empty_16 = call i32 (...)* @_ssdm_op_SpecLoopName([13 x i8]* @memset_data1_str) nounwind"   --->   Operation 164 'specloopname' 'empty_16' <Predicate = true> <Delay = 0.00>
+ST_17 : Operation 165 [1/1] (0.00ns)   --->   "%empty_17 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 97, i64 97, i64 97) nounwind"   --->   Operation 165 'speclooptripcount' 'empty_17' <Predicate = true> <Delay = 0.00>
+ST_17 : Operation 166 [1/1] (0.00ns)   --->   "br i1 %icmp_ln13, label %meminst1316, label %meminst17" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 166 'br' <Predicate = true> <Delay = 0.00>
+ST_17 : Operation 167 [1/1] (0.00ns)   --->   "%empty_18 = call i32 (...)* @_ssdm_op_SpecLoopName([13 x i8]* @memset_data1_str) nounwind"   --->   Operation 167 'specloopname' 'empty_18' <Predicate = (icmp_ln13)> <Delay = 0.00>
+ST_17 : Operation 168 [1/1] (0.00ns)   --->   "br i1 %phi_ln13, label %meminst20.preheader, label %meminst13" [Linear-regression-on-SOC/source.cpp:13]   --->   Operation 168 'br' <Predicate = (icmp_ln13)> <Delay = 0.00>
+ST_17 : Operation 169 [1/1] (1.76ns)   --->   "br label %meminst20" [Linear-regression-on-SOC/source.cpp:14]   --->   Operation 169 'br' <Predicate = (icmp_ln13 & phi_ln13)> <Delay = 1.76>
+
+State 18 <SV = 15> <Delay = 3.25>
+ST_18 : Operation 170 [1/1] (0.00ns)   --->   "%phi_ln14 = phi i7 [ %add_ln14, %meminst20 ], [ 0, %meminst20.preheader ]" [Linear-regression-on-SOC/source.cpp:14]   --->   Operation 170 'phi' 'phi_ln14' <Predicate = true> <Delay = 0.00>
+ST_18 : Operation 171 [1/1] (1.87ns)   --->   "%add_ln14 = add i7 %phi_ln14, 1" [Linear-regression-on-SOC/source.cpp:14]   --->   Operation 171 'add' 'add_ln14' <Predicate = true> <Delay = 1.87> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_18 : Operation 172 [1/1] (0.00ns)   --->   "%zext_ln14 = zext i7 %phi_ln14 to i64" [Linear-regression-on-SOC/source.cpp:14]   --->   Operation 172 'zext' 'zext_ln14' <Predicate = true> <Delay = 0.00>
+ST_18 : Operation 173 [1/1] (0.00ns)   --->   "%y_addr = getelementptr [97 x float]* %y, i64 0, i64 %zext_ln14" [Linear-regression-on-SOC/source.cpp:14]   --->   Operation 173 'getelementptr' 'y_addr' <Predicate = true> <Delay = 0.00>
+ST_18 : Operation 174 [1/1] (3.25ns)   --->   "store float 0.000000e+00, float* %y_addr, align 4" [Linear-regression-on-SOC/source.cpp:14]   --->   Operation 174 'store' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_18 : Operation 175 [1/1] (1.48ns)   --->   "%icmp_ln14 = icmp eq i7 %phi_ln14, -32" [Linear-regression-on-SOC/source.cpp:14]   --->   Operation 175 'icmp' 'icmp_ln14' <Predicate = true> <Delay = 1.48> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.48> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_18 : Operation 176 [1/1] (0.00ns)   --->   "%empty_19 = call i32 (...)* @_ssdm_op_SpecLoopName([9 x i8]* @memset_y_str) nounwind"   --->   Operation 176 'specloopname' 'empty_19' <Predicate = true> <Delay = 0.00>
+ST_18 : Operation 177 [1/1] (0.00ns)   --->   "%empty_20 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 97, i64 97, i64 97) nounwind"   --->   Operation 177 'speclooptripcount' 'empty_20' <Predicate = true> <Delay = 0.00>
+ST_18 : Operation 178 [1/1] (0.00ns)   --->   "br i1 %icmp_ln14, label %.preheader68.preheader, label %meminst20" [Linear-regression-on-SOC/source.cpp:14]   --->   Operation 178 'br' <Predicate = true> <Delay = 0.00>
+ST_18 : Operation 179 [1/1] (1.76ns)   --->   "br label %.preheader68" [Linear-regression-on-SOC/source.cpp:15]   --->   Operation 179 'br' <Predicate = (icmp_ln14)> <Delay = 1.76>
+
+State 19 <SV = 16> <Delay = 5.16>
+ST_19 : Operation 180 [1/1] (0.00ns)   --->   "%i_0 = phi i7 [ %i, %1 ], [ 0, %.preheader68.preheader ]"   --->   Operation 180 'phi' 'i_0' <Predicate = true> <Delay = 0.00>
+ST_19 : Operation 181 [1/1] (0.00ns)   --->   "%zext_ln15 = zext i7 %i_0 to i8" [Linear-regression-on-SOC/source.cpp:15]   --->   Operation 181 'zext' 'zext_ln15' <Predicate = true> <Delay = 0.00>
+ST_19 : Operation 182 [1/1] (1.48ns)   --->   "%icmp_ln15 = icmp eq i7 %i_0, -31" [Linear-regression-on-SOC/source.cpp:15]   --->   Operation 182 'icmp' 'icmp_ln15' <Predicate = true> <Delay = 1.48> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.48> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_19 : Operation 183 [1/1] (0.00ns)   --->   "%empty_21 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 97, i64 97, i64 97) nounwind"   --->   Operation 183 'speclooptripcount' 'empty_21' <Predicate = true> <Delay = 0.00>
+ST_19 : Operation 184 [1/1] (1.87ns)   --->   "%i = add i7 %i_0, 1" [Linear-regression-on-SOC/source.cpp:15]   --->   Operation 184 'add' 'i' <Predicate = true> <Delay = 1.87> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_19 : Operation 185 [1/1] (0.00ns)   --->   "br i1 %icmp_ln15, label %.preheader67.preheader, label %1" [Linear-regression-on-SOC/source.cpp:15]   --->   Operation 185 'br' <Predicate = true> <Delay = 0.00>
+ST_19 : Operation 186 [1/1] (0.00ns)   --->   "%zext_ln17 = zext i7 %i_0 to i64" [Linear-regression-on-SOC/source.cpp:17]   --->   Operation 186 'zext' 'zext_ln17' <Predicate = (!icmp_ln15)> <Delay = 0.00>
+ST_19 : Operation 187 [1/1] (1.91ns)   --->   "%add_ln21 = add i8 %zext_ln15, 97" [Linear-regression-on-SOC/source.cpp:21]   --->   Operation 187 'add' 'add_ln21' <Predicate = (!icmp_ln15)> <Delay = 1.91> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_19 : Operation 188 [1/1] (0.00ns)   --->   "%zext_ln21 = zext i8 %add_ln21 to i64" [Linear-regression-on-SOC/source.cpp:21]   --->   Operation 188 'zext' 'zext_ln21' <Predicate = (!icmp_ln15)> <Delay = 0.00>
+ST_19 : Operation 189 [1/1] (0.00ns)   --->   "%x_input_addr_1 = getelementptr inbounds [194 x float]* %x_input, i64 0, i64 %zext_ln17" [Linear-regression-on-SOC/source.cpp:18]   --->   Operation 189 'getelementptr' 'x_input_addr_1' <Predicate = (!icmp_ln15)> <Delay = 0.00>
+ST_19 : Operation 190 [2/2] (3.25ns)   --->   "%x_input_load = load float* %x_input_addr_1, align 4" [Linear-regression-on-SOC/source.cpp:18]   --->   Operation 190 'load' 'x_input_load' <Predicate = (!icmp_ln15)> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_19 : Operation 191 [1/1] (0.00ns)   --->   "%x_input_addr_2 = getelementptr inbounds [194 x float]* %x_input, i64 0, i64 %zext_ln21" [Linear-regression-on-SOC/source.cpp:19]   --->   Operation 191 'getelementptr' 'x_input_addr_2' <Predicate = (!icmp_ln15)> <Delay = 0.00>
+ST_19 : Operation 192 [2/2] (3.25ns)   --->   "%x_input_load_1 = load float* %x_input_addr_2, align 4" [Linear-regression-on-SOC/source.cpp:19]   --->   Operation 192 'load' 'x_input_load_1' <Predicate = (!icmp_ln15)> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_19 : Operation 193 [1/1] (1.76ns)   --->   "br label %.preheader67" [Linear-regression-on-SOC/source.cpp:32]   --->   Operation 193 'br' <Predicate = (icmp_ln15)> <Delay = 1.76>
+
+State 20 <SV = 17> <Delay = 6.50>
+ST_20 : Operation 194 [1/1] (0.00ns)   --->   "%tmp_24 = call i8 @_ssdm_op_BitConcatenate.i8.i7.i1(i7 %i_0, i1 false)" [Linear-regression-on-SOC/source.cpp:17]   --->   Operation 194 'bitconcatenate' 'tmp_24' <Predicate = true> <Delay = 0.00>
+ST_20 : Operation 195 [1/1] (0.00ns)   --->   "%zext_ln17_1 = zext i8 %tmp_24 to i64" [Linear-regression-on-SOC/source.cpp:17]   --->   Operation 195 'zext' 'zext_ln17_1' <Predicate = true> <Delay = 0.00>
+ST_20 : Operation 196 [1/1] (0.00ns)   --->   "%data_addr_1 = getelementptr [194 x float]* %data, i64 0, i64 %zext_ln17_1" [Linear-regression-on-SOC/source.cpp:17]   --->   Operation 196 'getelementptr' 'data_addr_1' <Predicate = true> <Delay = 0.00>
+ST_20 : Operation 197 [1/1] (0.00ns)   --->   "%or_ln18 = or i8 %tmp_24, 1" [Linear-regression-on-SOC/source.cpp:18]   --->   Operation 197 'or' 'or_ln18' <Predicate = true> <Delay = 0.00>
+ST_20 : Operation 198 [1/1] (0.00ns)   --->   "%tmp_25 = call i64 @_ssdm_op_BitConcatenate.i64.i56.i8(i56 0, i8 %or_ln18)" [Linear-regression-on-SOC/source.cpp:18]   --->   Operation 198 'bitconcatenate' 'tmp_25' <Predicate = true> <Delay = 0.00>
+ST_20 : Operation 199 [1/1] (0.00ns)   --->   "%data_addr_2 = getelementptr [194 x float]* %data, i64 0, i64 %tmp_25" [Linear-regression-on-SOC/source.cpp:18]   --->   Operation 199 'getelementptr' 'data_addr_2' <Predicate = true> <Delay = 0.00>
+ST_20 : Operation 200 [1/1] (0.00ns)   --->   "%data1_addr_1 = getelementptr [194 x float]* %data1, i64 0, i64 %zext_ln17" [Linear-regression-on-SOC/source.cpp:20]   --->   Operation 200 'getelementptr' 'data1_addr_1' <Predicate = true> <Delay = 0.00>
+ST_20 : Operation 201 [1/1] (0.00ns)   --->   "%data1_addr_2 = getelementptr [194 x float]* %data1, i64 0, i64 %zext_ln21" [Linear-regression-on-SOC/source.cpp:21]   --->   Operation 201 'getelementptr' 'data1_addr_2' <Predicate = true> <Delay = 0.00>
+ST_20 : Operation 202 [1/1] (3.25ns)   --->   "store float 1.000000e+00, float* %data_addr_1, align 8" [Linear-regression-on-SOC/source.cpp:17]   --->   Operation 202 'store' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_20 : Operation 203 [1/2] (3.25ns)   --->   "%x_input_load = load float* %x_input_addr_1, align 4" [Linear-regression-on-SOC/source.cpp:18]   --->   Operation 203 'load' 'x_input_load' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_20 : Operation 204 [1/1] (3.25ns)   --->   "store float %x_input_load, float* %data_addr_2, align 4" [Linear-regression-on-SOC/source.cpp:18]   --->   Operation 204 'store' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_20 : Operation 205 [1/2] (3.25ns)   --->   "%x_input_load_1 = load float* %x_input_addr_2, align 4" [Linear-regression-on-SOC/source.cpp:19]   --->   Operation 205 'load' 'x_input_load_1' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_20 : Operation 206 [1/1] (0.00ns)   --->   "%y_addr_1 = getelementptr inbounds [97 x float]* %y, i64 0, i64 %zext_ln17" [Linear-regression-on-SOC/source.cpp:19]   --->   Operation 206 'getelementptr' 'y_addr_1' <Predicate = true> <Delay = 0.00>
+ST_20 : Operation 207 [1/1] (3.25ns)   --->   "store float %x_input_load_1, float* %y_addr_1, align 4" [Linear-regression-on-SOC/source.cpp:19]   --->   Operation 207 'store' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_20 : Operation 208 [1/1] (3.25ns)   --->   "store float 1.000000e+00, float* %data1_addr_1, align 4" [Linear-regression-on-SOC/source.cpp:20]   --->   Operation 208 'store' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_20 : Operation 209 [1/1] (3.25ns)   --->   "store float %x_input_load, float* %data1_addr_2, align 4" [Linear-regression-on-SOC/source.cpp:21]   --->   Operation 209 'store' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_20 : Operation 210 [1/1] (0.00ns)   --->   "br label %.preheader68" [Linear-regression-on-SOC/source.cpp:15]   --->   Operation 210 'br' <Predicate = true> <Delay = 0.00>
+
+State 21 <SV = 17> <Delay = 8.75>
+ST_21 : Operation 211 [1/1] (0.00ns)   --->   "%theta_1_2 = phi float [ %theta_1, %meminst39.preheader ], [ %select_ln11, %.preheader67.preheader ]"   --->   Operation 211 'phi' 'theta_1_2' <Predicate = true> <Delay = 0.00>
+ST_21 : Operation 212 [1/1] (0.00ns)   --->   "%theta_0_2 = phi float [ %theta_0, %meminst39.preheader ], [ %select_ln11_1, %.preheader67.preheader ]"   --->   Operation 212 'phi' 'theta_0_2' <Predicate = true> <Delay = 0.00>
+ST_21 : Operation 213 [1/1] (0.00ns)   --->   "%empty_22 = phi float [ %theta_1, %meminst39.preheader ], [ 0.000000e+00, %.preheader67.preheader ]"   --->   Operation 213 'phi' 'empty_22' <Predicate = true> <Delay = 0.00>
+ST_21 : Operation 214 [1/1] (0.00ns)   --->   "%empty_23 = phi float [ %theta_0, %meminst39.preheader ], [ 0.000000e+00, %.preheader67.preheader ]"   --->   Operation 214 'phi' 'empty_23' <Predicate = true> <Delay = 0.00>
+ST_21 : Operation 215 [1/1] (0.00ns)   --->   "%i2_0 = phi i11 [ %i_2, %meminst39.preheader ], [ 0, %.preheader67.preheader ]"   --->   Operation 215 'phi' 'i2_0' <Predicate = true> <Delay = 0.00>
+ST_21 : Operation 216 [1/1] (1.88ns)   --->   "%icmp_ln32 = icmp eq i11 %i2_0, -548" [Linear-regression-on-SOC/source.cpp:32]   --->   Operation 216 'icmp' 'icmp_ln32' <Predicate = true> <Delay = 1.88> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.48> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_21 : Operation 217 [1/1] (0.00ns)   --->   "%empty_24 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 1500, i64 1500, i64 1500) nounwind"   --->   Operation 217 'speclooptripcount' 'empty_24' <Predicate = true> <Delay = 0.00>
+ST_21 : Operation 218 [1/1] (1.63ns)   --->   "%i_2 = add i11 %i2_0, 1" [Linear-regression-on-SOC/source.cpp:32]   --->   Operation 218 'add' 'i_2' <Predicate = true> <Delay = 1.63> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_21 : Operation 219 [1/1] (0.00ns)   --->   "br i1 %icmp_ln32, label %burst.wr.header.preheader, label %.preheader64.preheader" [Linear-regression-on-SOC/source.cpp:32]   --->   Operation 219 'br' <Predicate = true> <Delay = 0.00>
+ST_21 : Operation 220 [1/1] (1.76ns)   --->   "br label %.preheader64" [Linear-regression-on-SOC/source.cpp:35]   --->   Operation 220 'br' <Predicate = (!icmp_ln32)> <Delay = 1.76>
+ST_21 : Operation 221 [1/1] (8.75ns)   --->   "%gmem_addr_wr_req = call i1 @_ssdm_op_WriteReq.m_axi.floatP(float* %gmem_addr, i32 2)" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 221 'writereq' 'gmem_addr_wr_req' <Predicate = (icmp_ln32)> <Delay = 8.75> <Core = "m_axi">   --->   Core 9 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_21 : Operation 222 [1/1] (1.76ns)   --->   "br label %burst.wr.header" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 222 'br' <Predicate = (icmp_ln32)> <Delay = 1.76>
+
+State 22 <SV = 18> <Delay = 5.16>
+ST_22 : Operation 223 [1/1] (0.00ns)   --->   "%empty_25 = phi float [ %tmp_6, %2 ], [ 0.000000e+00, %.preheader64.preheader ]" [Linear-regression-on-SOC/source.cpp:38]   --->   Operation 223 'phi' 'empty_25' <Predicate = true> <Delay = 0.00>
+ST_22 : Operation 224 [1/1] (0.00ns)   --->   "%empty_26 = phi float [ %tmp_4, %2 ], [ 0.000000e+00, %.preheader64.preheader ]" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 224 'phi' 'empty_26' <Predicate = true> <Delay = 0.00>
+ST_22 : Operation 225 [1/1] (0.00ns)   --->   "%i3_0 = phi i7 [ %i_1, %2 ], [ 0, %.preheader64.preheader ]"   --->   Operation 225 'phi' 'i3_0' <Predicate = true> <Delay = 0.00>
+ST_22 : Operation 226 [1/1] (1.48ns)   --->   "%icmp_ln35 = icmp eq i7 %i3_0, -31" [Linear-regression-on-SOC/source.cpp:35]   --->   Operation 226 'icmp' 'icmp_ln35' <Predicate = true> <Delay = 1.48> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.48> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_22 : Operation 227 [1/1] (0.00ns)   --->   "%empty_27 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 97, i64 97, i64 97) nounwind"   --->   Operation 227 'speclooptripcount' 'empty_27' <Predicate = true> <Delay = 0.00>
+ST_22 : Operation 228 [1/1] (1.87ns)   --->   "%i_1 = add i7 %i3_0, 1" [Linear-regression-on-SOC/source.cpp:35]   --->   Operation 228 'add' 'i_1' <Predicate = true> <Delay = 1.87> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_22 : Operation 229 [1/1] (0.00ns)   --->   "br i1 %icmp_ln35, label %.preheader.preheader, label %2" [Linear-regression-on-SOC/source.cpp:35]   --->   Operation 229 'br' <Predicate = true> <Delay = 0.00>
+ST_22 : Operation 230 [1/1] (0.00ns)   --->   "%zext_ln37 = zext i7 %i3_0 to i64" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 230 'zext' 'zext_ln37' <Predicate = (!icmp_ln35)> <Delay = 0.00>
+ST_22 : Operation 231 [1/1] (0.00ns)   --->   "%zext_ln37_1 = zext i7 %i3_0 to i8" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 231 'zext' 'zext_ln37_1' <Predicate = (!icmp_ln35)> <Delay = 0.00>
+ST_22 : Operation 232 [1/1] (0.00ns)   --->   "%data1_addr_3 = getelementptr [194 x float]* %data1, i64 0, i64 %zext_ln37" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 232 'getelementptr' 'data1_addr_3' <Predicate = (!icmp_ln35)> <Delay = 0.00>
+ST_22 : Operation 233 [1/1] (1.91ns)   --->   "%add_ln38 = add i8 %zext_ln37_1, 97" [Linear-regression-on-SOC/source.cpp:38]   --->   Operation 233 'add' 'add_ln38' <Predicate = (!icmp_ln35)> <Delay = 1.91> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_22 : Operation 234 [1/1] (0.00ns)   --->   "%zext_ln38 = zext i8 %add_ln38 to i64" [Linear-regression-on-SOC/source.cpp:38]   --->   Operation 234 'zext' 'zext_ln38' <Predicate = (!icmp_ln35)> <Delay = 0.00>
+ST_22 : Operation 235 [1/1] (0.00ns)   --->   "%data1_addr_4 = getelementptr [194 x float]* %data1, i64 0, i64 %zext_ln38" [Linear-regression-on-SOC/source.cpp:38]   --->   Operation 235 'getelementptr' 'data1_addr_4' <Predicate = (!icmp_ln35)> <Delay = 0.00>
+ST_22 : Operation 236 [2/2] (3.25ns)   --->   "%data1_load = load float* %data1_addr_3, align 4" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 236 'load' 'data1_load' <Predicate = (!icmp_ln35)> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_22 : Operation 237 [1/1] (0.00ns)   --->   "%y_addr_2 = getelementptr inbounds [97 x float]* %y, i64 0, i64 %zext_ln37" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 237 'getelementptr' 'y_addr_2' <Predicate = (!icmp_ln35)> <Delay = 0.00>
+ST_22 : Operation 238 [2/2] (3.25ns)   --->   "%y_load = load float* %y_addr_2, align 4" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 238 'load' 'y_load' <Predicate = (!icmp_ln35)> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_22 : Operation 239 [2/2] (3.25ns)   --->   "%data1_load_1 = load float* %data1_addr_4, align 4" [Linear-regression-on-SOC/source.cpp:38]   --->   Operation 239 'load' 'data1_load_1' <Predicate = (!icmp_ln35)> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_22 : Operation 240 [1/1] (1.76ns)   --->   "br label %.preheader" [Linear-regression-on-SOC/source.cpp:41]   --->   Operation 240 'br' <Predicate = (icmp_ln35)> <Delay = 1.76>
+
+State 23 <SV = 19> <Delay = 3.25>
+ST_23 : Operation 241 [1/2] (3.25ns)   --->   "%data1_load = load float* %data1_addr_3, align 4" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 241 'load' 'data1_load' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_23 : Operation 242 [1/2] (3.25ns)   --->   "%y_load = load float* %y_addr_2, align 4" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 242 'load' 'y_load' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_23 : Operation 243 [1/2] (3.25ns)   --->   "%data1_load_1 = load float* %data1_addr_4, align 4" [Linear-regression-on-SOC/source.cpp:38]   --->   Operation 243 'load' 'data1_load_1' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+
+State 24 <SV = 20> <Delay = 5.70>
+ST_24 : Operation 244 [4/4] (5.70ns)   --->   "%tmp_3 = fmul float %data1_load, %y_load" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 244 'fmul' 'tmp_3' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_24 : Operation 245 [4/4] (5.70ns)   --->   "%tmp_5 = fmul float %data1_load_1, %y_load" [Linear-regression-on-SOC/source.cpp:38]   --->   Operation 245 'fmul' 'tmp_5' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 25 <SV = 21> <Delay = 5.70>
+ST_25 : Operation 246 [3/4] (5.70ns)   --->   "%tmp_3 = fmul float %data1_load, %y_load" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 246 'fmul' 'tmp_3' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_25 : Operation 247 [3/4] (5.70ns)   --->   "%tmp_5 = fmul float %data1_load_1, %y_load" [Linear-regression-on-SOC/source.cpp:38]   --->   Operation 247 'fmul' 'tmp_5' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 26 <SV = 22> <Delay = 5.70>
+ST_26 : Operation 248 [2/4] (5.70ns)   --->   "%tmp_3 = fmul float %data1_load, %y_load" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 248 'fmul' 'tmp_3' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_26 : Operation 249 [2/4] (5.70ns)   --->   "%tmp_5 = fmul float %data1_load_1, %y_load" [Linear-regression-on-SOC/source.cpp:38]   --->   Operation 249 'fmul' 'tmp_5' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 27 <SV = 23> <Delay = 5.70>
+ST_27 : Operation 250 [1/4] (5.70ns)   --->   "%tmp_3 = fmul float %data1_load, %y_load" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 250 'fmul' 'tmp_3' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_27 : Operation 251 [1/4] (5.70ns)   --->   "%tmp_5 = fmul float %data1_load_1, %y_load" [Linear-regression-on-SOC/source.cpp:38]   --->   Operation 251 'fmul' 'tmp_5' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 28 <SV = 24> <Delay = 7.25>
+ST_28 : Operation 252 [5/5] (7.25ns)   --->   "%tmp_4 = fadd float %empty_26, %tmp_3" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 252 'fadd' 'tmp_4' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_28 : Operation 253 [5/5] (7.25ns)   --->   "%tmp_6 = fadd float %empty_25, %tmp_5" [Linear-regression-on-SOC/source.cpp:38]   --->   Operation 253 'fadd' 'tmp_6' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 29 <SV = 25> <Delay = 7.25>
+ST_29 : Operation 254 [4/5] (7.25ns)   --->   "%tmp_4 = fadd float %empty_26, %tmp_3" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 254 'fadd' 'tmp_4' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_29 : Operation 255 [4/5] (7.25ns)   --->   "%tmp_6 = fadd float %empty_25, %tmp_5" [Linear-regression-on-SOC/source.cpp:38]   --->   Operation 255 'fadd' 'tmp_6' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 30 <SV = 26> <Delay = 7.25>
+ST_30 : Operation 256 [3/5] (7.25ns)   --->   "%tmp_4 = fadd float %empty_26, %tmp_3" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 256 'fadd' 'tmp_4' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_30 : Operation 257 [3/5] (7.25ns)   --->   "%tmp_6 = fadd float %empty_25, %tmp_5" [Linear-regression-on-SOC/source.cpp:38]   --->   Operation 257 'fadd' 'tmp_6' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 31 <SV = 27> <Delay = 7.25>
+ST_31 : Operation 258 [2/5] (7.25ns)   --->   "%tmp_4 = fadd float %empty_26, %tmp_3" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 258 'fadd' 'tmp_4' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_31 : Operation 259 [2/5] (7.25ns)   --->   "%tmp_6 = fadd float %empty_25, %tmp_5" [Linear-regression-on-SOC/source.cpp:38]   --->   Operation 259 'fadd' 'tmp_6' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 32 <SV = 28> <Delay = 7.25>
+ST_32 : Operation 260 [1/5] (7.25ns)   --->   "%tmp_4 = fadd float %empty_26, %tmp_3" [Linear-regression-on-SOC/source.cpp:37]   --->   Operation 260 'fadd' 'tmp_4' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_32 : Operation 261 [1/5] (7.25ns)   --->   "%tmp_6 = fadd float %empty_25, %tmp_5" [Linear-regression-on-SOC/source.cpp:38]   --->   Operation 261 'fadd' 'tmp_6' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_32 : Operation 262 [1/1] (0.00ns)   --->   "br label %.preheader64" [Linear-regression-on-SOC/source.cpp:35]   --->   Operation 262 'br' <Predicate = true> <Delay = 0.00>
+
+State 33 <SV = 19> <Delay = 5.70>
+ST_33 : Operation 263 [1/1] (0.00ns)   --->   "%empty_28 = phi float [ %tmp_13, %3 ], [ 0.000000e+00, %.preheader.preheader ]" [Linear-regression-on-SOC/source.cpp:46]   --->   Operation 263 'phi' 'empty_28' <Predicate = true> <Delay = 0.00>
+ST_33 : Operation 264 [1/1] (0.00ns)   --->   "%empty_29 = phi float [ %tmp_11, %3 ], [ 0.000000e+00, %.preheader.preheader ]" [Linear-regression-on-SOC/source.cpp:45]   --->   Operation 264 'phi' 'empty_29' <Predicate = true> <Delay = 0.00>
+ST_33 : Operation 265 [1/1] (0.00ns)   --->   "%empty_30 = phi float [ %tmp_s, %3 ], [ 0.000000e+00, %.preheader.preheader ]" [Linear-regression-on-SOC/source.cpp:44]   --->   Operation 265 'phi' 'empty_30' <Predicate = true> <Delay = 0.00>
+ST_33 : Operation 266 [1/1] (0.00ns)   --->   "%empty_31 = phi float [ %tmp_8, %3 ], [ 0.000000e+00, %.preheader.preheader ]" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 266 'phi' 'empty_31' <Predicate = true> <Delay = 0.00>
+ST_33 : Operation 267 [1/1] (0.00ns)   --->   "%i4_0 = phi i7 [ %i_3, %3 ], [ 0, %.preheader.preheader ]"   --->   Operation 267 'phi' 'i4_0' <Predicate = true> <Delay = 0.00>
+ST_33 : Operation 268 [1/1] (1.48ns)   --->   "%icmp_ln41 = icmp eq i7 %i4_0, -31" [Linear-regression-on-SOC/source.cpp:41]   --->   Operation 268 'icmp' 'icmp_ln41' <Predicate = true> <Delay = 1.48> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.48> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_33 : Operation 269 [1/1] (0.00ns)   --->   "%empty_32 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 97, i64 97, i64 97) nounwind"   --->   Operation 269 'speclooptripcount' 'empty_32' <Predicate = true> <Delay = 0.00>
+ST_33 : Operation 270 [1/1] (1.87ns)   --->   "%i_3 = add i7 %i4_0, 1" [Linear-regression-on-SOC/source.cpp:41]   --->   Operation 270 'add' 'i_3' <Predicate = true> <Delay = 1.87> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_33 : Operation 271 [1/1] (0.00ns)   --->   "br i1 %icmp_ln41, label %meminst39.preheader, label %3" [Linear-regression-on-SOC/source.cpp:41]   --->   Operation 271 'br' <Predicate = true> <Delay = 0.00>
+ST_33 : Operation 272 [1/1] (0.00ns)   --->   "%zext_ln43 = zext i7 %i4_0 to i64" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 272 'zext' 'zext_ln43' <Predicate = (!icmp_ln41)> <Delay = 0.00>
+ST_33 : Operation 273 [1/1] (0.00ns)   --->   "%zext_ln43_2 = zext i7 %i4_0 to i8" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 273 'zext' 'zext_ln43_2' <Predicate = (!icmp_ln41)> <Delay = 0.00>
+ST_33 : Operation 274 [1/1] (0.00ns)   --->   "%tmp_26 = call i8 @_ssdm_op_BitConcatenate.i8.i7.i1(i7 %i4_0, i1 false)" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 274 'bitconcatenate' 'tmp_26' <Predicate = (!icmp_ln41)> <Delay = 0.00>
+ST_33 : Operation 275 [1/1] (0.00ns)   --->   "%zext_ln43_1 = zext i8 %tmp_26 to i64" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 275 'zext' 'zext_ln43_1' <Predicate = (!icmp_ln41)> <Delay = 0.00>
+ST_33 : Operation 276 [1/1] (0.00ns)   --->   "%data_addr_3 = getelementptr [194 x float]* %data, i64 0, i64 %zext_ln43_1" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 276 'getelementptr' 'data_addr_3' <Predicate = (!icmp_ln41)> <Delay = 0.00>
+ST_33 : Operation 277 [1/1] (0.00ns)   --->   "%or_ln44 = or i8 %tmp_26, 1" [Linear-regression-on-SOC/source.cpp:44]   --->   Operation 277 'or' 'or_ln44' <Predicate = (!icmp_ln41)> <Delay = 0.00>
+ST_33 : Operation 278 [1/1] (0.00ns)   --->   "%tmp_27 = call i64 @_ssdm_op_BitConcatenate.i64.i56.i8(i56 0, i8 %or_ln44)" [Linear-regression-on-SOC/source.cpp:44]   --->   Operation 278 'bitconcatenate' 'tmp_27' <Predicate = (!icmp_ln41)> <Delay = 0.00>
+ST_33 : Operation 279 [1/1] (0.00ns)   --->   "%data_addr_4 = getelementptr [194 x float]* %data, i64 0, i64 %tmp_27" [Linear-regression-on-SOC/source.cpp:44]   --->   Operation 279 'getelementptr' 'data_addr_4' <Predicate = (!icmp_ln41)> <Delay = 0.00>
+ST_33 : Operation 280 [1/1] (0.00ns)   --->   "%data1_addr_5 = getelementptr [194 x float]* %data1, i64 0, i64 %zext_ln43" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 280 'getelementptr' 'data1_addr_5' <Predicate = (!icmp_ln41)> <Delay = 0.00>
+ST_33 : Operation 281 [1/1] (1.91ns)   --->   "%add_ln45 = add i8 %zext_ln43_2, 97" [Linear-regression-on-SOC/source.cpp:45]   --->   Operation 281 'add' 'add_ln45' <Predicate = (!icmp_ln41)> <Delay = 1.91> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_33 : Operation 282 [1/1] (0.00ns)   --->   "%zext_ln45 = zext i8 %add_ln45 to i64" [Linear-regression-on-SOC/source.cpp:45]   --->   Operation 282 'zext' 'zext_ln45' <Predicate = (!icmp_ln41)> <Delay = 0.00>
+ST_33 : Operation 283 [1/1] (0.00ns)   --->   "%data1_addr_6 = getelementptr [194 x float]* %data1, i64 0, i64 %zext_ln45" [Linear-regression-on-SOC/source.cpp:45]   --->   Operation 283 'getelementptr' 'data1_addr_6' <Predicate = (!icmp_ln41)> <Delay = 0.00>
+ST_33 : Operation 284 [2/2] (3.25ns)   --->   "%data1_load_2 = load float* %data1_addr_5, align 4" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 284 'load' 'data1_load_2' <Predicate = (!icmp_ln41)> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_33 : Operation 285 [2/2] (3.25ns)   --->   "%data_load = load float* %data_addr_3, align 8" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 285 'load' 'data_load' <Predicate = (!icmp_ln41)> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_33 : Operation 286 [2/2] (3.25ns)   --->   "%data_load_1 = load float* %data_addr_4, align 4" [Linear-regression-on-SOC/source.cpp:44]   --->   Operation 286 'load' 'data_load_1' <Predicate = (!icmp_ln41)> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_33 : Operation 287 [2/2] (3.25ns)   --->   "%data1_load_3 = load float* %data1_addr_6, align 4" [Linear-regression-on-SOC/source.cpp:45]   --->   Operation 287 'load' 'data1_load_3' <Predicate = (!icmp_ln41)> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_33 : Operation 288 [4/4] (5.70ns)   --->   "%tmp_1 = fmul float %empty_31, %empty_23" [Linear-regression-on-SOC/source.cpp:49]   --->   Operation 288 'fmul' 'tmp_1' <Predicate = (icmp_ln41)> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_33 : Operation 289 [4/4] (5.70ns)   --->   "%tmp_2 = fmul float %empty_30, %empty_22" [Linear-regression-on-SOC/source.cpp:49]   --->   Operation 289 'fmul' 'tmp_2' <Predicate = (icmp_ln41)> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_33 : Operation 290 [4/4] (5.70ns)   --->   "%tmp_15 = fmul float %empty_29, %empty_23" [Linear-regression-on-SOC/source.cpp:50]   --->   Operation 290 'fmul' 'tmp_15' <Predicate = (icmp_ln41)> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_33 : Operation 291 [4/4] (5.70ns)   --->   "%tmp_16 = fmul float %empty_28, %empty_22" [Linear-regression-on-SOC/source.cpp:50]   --->   Operation 291 'fmul' 'tmp_16' <Predicate = (icmp_ln41)> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 34 <SV = 20> <Delay = 3.25>
+ST_34 : Operation 292 [1/2] (3.25ns)   --->   "%data1_load_2 = load float* %data1_addr_5, align 4" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 292 'load' 'data1_load_2' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_34 : Operation 293 [1/2] (3.25ns)   --->   "%data_load = load float* %data_addr_3, align 8" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 293 'load' 'data_load' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_34 : Operation 294 [1/2] (3.25ns)   --->   "%data_load_1 = load float* %data_addr_4, align 4" [Linear-regression-on-SOC/source.cpp:44]   --->   Operation 294 'load' 'data_load_1' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+ST_34 : Operation 295 [1/2] (3.25ns)   --->   "%data1_load_3 = load float* %data1_addr_6, align 4" [Linear-regression-on-SOC/source.cpp:45]   --->   Operation 295 'load' 'data1_load_3' <Predicate = true> <Delay = 3.25> <Core = "RAM">   --->   Core 37 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 194> <RAM>
+
+State 35 <SV = 21> <Delay = 5.70>
+ST_35 : Operation 296 [4/4] (5.70ns)   --->   "%tmp_7 = fmul float %data1_load_2, %data_load" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 296 'fmul' 'tmp_7' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_35 : Operation 297 [4/4] (5.70ns)   --->   "%tmp_9 = fmul float %data1_load_2, %data_load_1" [Linear-regression-on-SOC/source.cpp:44]   --->   Operation 297 'fmul' 'tmp_9' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_35 : Operation 298 [4/4] (5.70ns)   --->   "%tmp_10 = fmul float %data1_load_3, %data_load" [Linear-regression-on-SOC/source.cpp:45]   --->   Operation 298 'fmul' 'tmp_10' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_35 : Operation 299 [4/4] (5.70ns)   --->   "%tmp_12 = fmul float %data1_load_3, %data_load_1" [Linear-regression-on-SOC/source.cpp:46]   --->   Operation 299 'fmul' 'tmp_12' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 36 <SV = 22> <Delay = 5.70>
+ST_36 : Operation 300 [3/4] (5.70ns)   --->   "%tmp_7 = fmul float %data1_load_2, %data_load" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 300 'fmul' 'tmp_7' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_36 : Operation 301 [3/4] (5.70ns)   --->   "%tmp_9 = fmul float %data1_load_2, %data_load_1" [Linear-regression-on-SOC/source.cpp:44]   --->   Operation 301 'fmul' 'tmp_9' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_36 : Operation 302 [3/4] (5.70ns)   --->   "%tmp_10 = fmul float %data1_load_3, %data_load" [Linear-regression-on-SOC/source.cpp:45]   --->   Operation 302 'fmul' 'tmp_10' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_36 : Operation 303 [3/4] (5.70ns)   --->   "%tmp_12 = fmul float %data1_load_3, %data_load_1" [Linear-regression-on-SOC/source.cpp:46]   --->   Operation 303 'fmul' 'tmp_12' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 37 <SV = 23> <Delay = 5.70>
+ST_37 : Operation 304 [2/4] (5.70ns)   --->   "%tmp_7 = fmul float %data1_load_2, %data_load" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 304 'fmul' 'tmp_7' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_37 : Operation 305 [2/4] (5.70ns)   --->   "%tmp_9 = fmul float %data1_load_2, %data_load_1" [Linear-regression-on-SOC/source.cpp:44]   --->   Operation 305 'fmul' 'tmp_9' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_37 : Operation 306 [2/4] (5.70ns)   --->   "%tmp_10 = fmul float %data1_load_3, %data_load" [Linear-regression-on-SOC/source.cpp:45]   --->   Operation 306 'fmul' 'tmp_10' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_37 : Operation 307 [2/4] (5.70ns)   --->   "%tmp_12 = fmul float %data1_load_3, %data_load_1" [Linear-regression-on-SOC/source.cpp:46]   --->   Operation 307 'fmul' 'tmp_12' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 38 <SV = 24> <Delay = 5.70>
+ST_38 : Operation 308 [1/4] (5.70ns)   --->   "%tmp_7 = fmul float %data1_load_2, %data_load" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 308 'fmul' 'tmp_7' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_38 : Operation 309 [1/4] (5.70ns)   --->   "%tmp_9 = fmul float %data1_load_2, %data_load_1" [Linear-regression-on-SOC/source.cpp:44]   --->   Operation 309 'fmul' 'tmp_9' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_38 : Operation 310 [1/4] (5.70ns)   --->   "%tmp_10 = fmul float %data1_load_3, %data_load" [Linear-regression-on-SOC/source.cpp:45]   --->   Operation 310 'fmul' 'tmp_10' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_38 : Operation 311 [1/4] (5.70ns)   --->   "%tmp_12 = fmul float %data1_load_3, %data_load_1" [Linear-regression-on-SOC/source.cpp:46]   --->   Operation 311 'fmul' 'tmp_12' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 39 <SV = 25> <Delay = 7.25>
+ST_39 : Operation 312 [5/5] (7.25ns)   --->   "%tmp_8 = fadd float %empty_31, %tmp_7" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 312 'fadd' 'tmp_8' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_39 : Operation 313 [5/5] (7.25ns)   --->   "%tmp_s = fadd float %empty_30, %tmp_9" [Linear-regression-on-SOC/source.cpp:44]   --->   Operation 313 'fadd' 'tmp_s' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_39 : Operation 314 [5/5] (7.25ns)   --->   "%tmp_11 = fadd float %empty_29, %tmp_10" [Linear-regression-on-SOC/source.cpp:45]   --->   Operation 314 'fadd' 'tmp_11' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_39 : Operation 315 [5/5] (7.25ns)   --->   "%tmp_13 = fadd float %empty_28, %tmp_12" [Linear-regression-on-SOC/source.cpp:46]   --->   Operation 315 'fadd' 'tmp_13' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 40 <SV = 26> <Delay = 7.25>
+ST_40 : Operation 316 [4/5] (7.25ns)   --->   "%tmp_8 = fadd float %empty_31, %tmp_7" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 316 'fadd' 'tmp_8' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_40 : Operation 317 [4/5] (7.25ns)   --->   "%tmp_s = fadd float %empty_30, %tmp_9" [Linear-regression-on-SOC/source.cpp:44]   --->   Operation 317 'fadd' 'tmp_s' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_40 : Operation 318 [4/5] (7.25ns)   --->   "%tmp_11 = fadd float %empty_29, %tmp_10" [Linear-regression-on-SOC/source.cpp:45]   --->   Operation 318 'fadd' 'tmp_11' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_40 : Operation 319 [4/5] (7.25ns)   --->   "%tmp_13 = fadd float %empty_28, %tmp_12" [Linear-regression-on-SOC/source.cpp:46]   --->   Operation 319 'fadd' 'tmp_13' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 41 <SV = 27> <Delay = 7.25>
+ST_41 : Operation 320 [3/5] (7.25ns)   --->   "%tmp_8 = fadd float %empty_31, %tmp_7" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 320 'fadd' 'tmp_8' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_41 : Operation 321 [3/5] (7.25ns)   --->   "%tmp_s = fadd float %empty_30, %tmp_9" [Linear-regression-on-SOC/source.cpp:44]   --->   Operation 321 'fadd' 'tmp_s' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_41 : Operation 322 [3/5] (7.25ns)   --->   "%tmp_11 = fadd float %empty_29, %tmp_10" [Linear-regression-on-SOC/source.cpp:45]   --->   Operation 322 'fadd' 'tmp_11' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_41 : Operation 323 [3/5] (7.25ns)   --->   "%tmp_13 = fadd float %empty_28, %tmp_12" [Linear-regression-on-SOC/source.cpp:46]   --->   Operation 323 'fadd' 'tmp_13' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 42 <SV = 28> <Delay = 7.25>
+ST_42 : Operation 324 [2/5] (7.25ns)   --->   "%tmp_8 = fadd float %empty_31, %tmp_7" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 324 'fadd' 'tmp_8' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_42 : Operation 325 [2/5] (7.25ns)   --->   "%tmp_s = fadd float %empty_30, %tmp_9" [Linear-regression-on-SOC/source.cpp:44]   --->   Operation 325 'fadd' 'tmp_s' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_42 : Operation 326 [2/5] (7.25ns)   --->   "%tmp_11 = fadd float %empty_29, %tmp_10" [Linear-regression-on-SOC/source.cpp:45]   --->   Operation 326 'fadd' 'tmp_11' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_42 : Operation 327 [2/5] (7.25ns)   --->   "%tmp_13 = fadd float %empty_28, %tmp_12" [Linear-regression-on-SOC/source.cpp:46]   --->   Operation 327 'fadd' 'tmp_13' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 43 <SV = 29> <Delay = 7.25>
+ST_43 : Operation 328 [1/5] (7.25ns)   --->   "%tmp_8 = fadd float %empty_31, %tmp_7" [Linear-regression-on-SOC/source.cpp:43]   --->   Operation 328 'fadd' 'tmp_8' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_43 : Operation 329 [1/5] (7.25ns)   --->   "%tmp_s = fadd float %empty_30, %tmp_9" [Linear-regression-on-SOC/source.cpp:44]   --->   Operation 329 'fadd' 'tmp_s' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_43 : Operation 330 [1/5] (7.25ns)   --->   "%tmp_11 = fadd float %empty_29, %tmp_10" [Linear-regression-on-SOC/source.cpp:45]   --->   Operation 330 'fadd' 'tmp_11' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_43 : Operation 331 [1/5] (7.25ns)   --->   "%tmp_13 = fadd float %empty_28, %tmp_12" [Linear-regression-on-SOC/source.cpp:46]   --->   Operation 331 'fadd' 'tmp_13' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_43 : Operation 332 [1/1] (0.00ns)   --->   "br label %.preheader" [Linear-regression-on-SOC/source.cpp:41]   --->   Operation 332 'br' <Predicate = true> <Delay = 0.00>
+
+State 44 <SV = 20> <Delay = 5.70>
+ST_44 : Operation 333 [3/4] (5.70ns)   --->   "%tmp_1 = fmul float %empty_31, %empty_23" [Linear-regression-on-SOC/source.cpp:49]   --->   Operation 333 'fmul' 'tmp_1' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_44 : Operation 334 [3/4] (5.70ns)   --->   "%tmp_2 = fmul float %empty_30, %empty_22" [Linear-regression-on-SOC/source.cpp:49]   --->   Operation 334 'fmul' 'tmp_2' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_44 : Operation 335 [3/4] (5.70ns)   --->   "%tmp_15 = fmul float %empty_29, %empty_23" [Linear-regression-on-SOC/source.cpp:50]   --->   Operation 335 'fmul' 'tmp_15' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_44 : Operation 336 [3/4] (5.70ns)   --->   "%tmp_16 = fmul float %empty_28, %empty_22" [Linear-regression-on-SOC/source.cpp:50]   --->   Operation 336 'fmul' 'tmp_16' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 45 <SV = 21> <Delay = 5.70>
+ST_45 : Operation 337 [2/4] (5.70ns)   --->   "%tmp_1 = fmul float %empty_31, %empty_23" [Linear-regression-on-SOC/source.cpp:49]   --->   Operation 337 'fmul' 'tmp_1' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_45 : Operation 338 [2/4] (5.70ns)   --->   "%tmp_2 = fmul float %empty_30, %empty_22" [Linear-regression-on-SOC/source.cpp:49]   --->   Operation 338 'fmul' 'tmp_2' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_45 : Operation 339 [2/4] (5.70ns)   --->   "%tmp_15 = fmul float %empty_29, %empty_23" [Linear-regression-on-SOC/source.cpp:50]   --->   Operation 339 'fmul' 'tmp_15' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_45 : Operation 340 [2/4] (5.70ns)   --->   "%tmp_16 = fmul float %empty_28, %empty_22" [Linear-regression-on-SOC/source.cpp:50]   --->   Operation 340 'fmul' 'tmp_16' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 46 <SV = 22> <Delay = 5.70>
+ST_46 : Operation 341 [1/4] (5.70ns)   --->   "%tmp_1 = fmul float %empty_31, %empty_23" [Linear-regression-on-SOC/source.cpp:49]   --->   Operation 341 'fmul' 'tmp_1' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_46 : Operation 342 [1/4] (5.70ns)   --->   "%tmp_2 = fmul float %empty_30, %empty_22" [Linear-regression-on-SOC/source.cpp:49]   --->   Operation 342 'fmul' 'tmp_2' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_46 : Operation 343 [1/4] (5.70ns)   --->   "%tmp_15 = fmul float %empty_29, %empty_23" [Linear-regression-on-SOC/source.cpp:50]   --->   Operation 343 'fmul' 'tmp_15' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_46 : Operation 344 [1/4] (5.70ns)   --->   "%tmp_16 = fmul float %empty_28, %empty_22" [Linear-regression-on-SOC/source.cpp:50]   --->   Operation 344 'fmul' 'tmp_16' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 47 <SV = 23> <Delay = 7.25>
+ST_47 : Operation 345 [5/5] (7.25ns)   --->   "%tmp_14 = fadd float %tmp_1, %tmp_2" [Linear-regression-on-SOC/source.cpp:49]   --->   Operation 345 'fadd' 'tmp_14' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_47 : Operation 346 [5/5] (7.25ns)   --->   "%tmp_17 = fadd float %tmp_15, %tmp_16" [Linear-regression-on-SOC/source.cpp:50]   --->   Operation 346 'fadd' 'tmp_17' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 48 <SV = 24> <Delay = 7.25>
+ST_48 : Operation 347 [4/5] (7.25ns)   --->   "%tmp_14 = fadd float %tmp_1, %tmp_2" [Linear-regression-on-SOC/source.cpp:49]   --->   Operation 347 'fadd' 'tmp_14' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_48 : Operation 348 [4/5] (7.25ns)   --->   "%tmp_17 = fadd float %tmp_15, %tmp_16" [Linear-regression-on-SOC/source.cpp:50]   --->   Operation 348 'fadd' 'tmp_17' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 49 <SV = 25> <Delay = 7.25>
+ST_49 : Operation 349 [3/5] (7.25ns)   --->   "%tmp_14 = fadd float %tmp_1, %tmp_2" [Linear-regression-on-SOC/source.cpp:49]   --->   Operation 349 'fadd' 'tmp_14' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_49 : Operation 350 [3/5] (7.25ns)   --->   "%tmp_17 = fadd float %tmp_15, %tmp_16" [Linear-regression-on-SOC/source.cpp:50]   --->   Operation 350 'fadd' 'tmp_17' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 50 <SV = 26> <Delay = 7.25>
+ST_50 : Operation 351 [2/5] (7.25ns)   --->   "%tmp_14 = fadd float %tmp_1, %tmp_2" [Linear-regression-on-SOC/source.cpp:49]   --->   Operation 351 'fadd' 'tmp_14' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_50 : Operation 352 [2/5] (7.25ns)   --->   "%tmp_17 = fadd float %tmp_15, %tmp_16" [Linear-regression-on-SOC/source.cpp:50]   --->   Operation 352 'fadd' 'tmp_17' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 51 <SV = 27> <Delay = 7.25>
+ST_51 : Operation 353 [1/5] (7.25ns)   --->   "%tmp_14 = fadd float %tmp_1, %tmp_2" [Linear-regression-on-SOC/source.cpp:49]   --->   Operation 353 'fadd' 'tmp_14' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_51 : Operation 354 [1/5] (7.25ns)   --->   "%tmp_17 = fadd float %tmp_15, %tmp_16" [Linear-regression-on-SOC/source.cpp:50]   --->   Operation 354 'fadd' 'tmp_17' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 52 <SV = 28> <Delay = 7.25>
+ST_52 : Operation 355 [5/5] (7.25ns)   --->   "%tmp_18 = fsub float %tmp_14, %empty_26" [Linear-regression-on-SOC/source.cpp:52]   --->   Operation 355 'fsub' 'tmp_18' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_52 : Operation 356 [5/5] (7.25ns)   --->   "%tmp_20 = fsub float %tmp_17, %empty_25" [Linear-regression-on-SOC/source.cpp:53]   --->   Operation 356 'fsub' 'tmp_20' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 53 <SV = 29> <Delay = 7.25>
+ST_53 : Operation 357 [4/5] (7.25ns)   --->   "%tmp_18 = fsub float %tmp_14, %empty_26" [Linear-regression-on-SOC/source.cpp:52]   --->   Operation 357 'fsub' 'tmp_18' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_53 : Operation 358 [4/5] (7.25ns)   --->   "%tmp_20 = fsub float %tmp_17, %empty_25" [Linear-regression-on-SOC/source.cpp:53]   --->   Operation 358 'fsub' 'tmp_20' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 54 <SV = 30> <Delay = 7.25>
+ST_54 : Operation 359 [3/5] (7.25ns)   --->   "%tmp_18 = fsub float %tmp_14, %empty_26" [Linear-regression-on-SOC/source.cpp:52]   --->   Operation 359 'fsub' 'tmp_18' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_54 : Operation 360 [3/5] (7.25ns)   --->   "%tmp_20 = fsub float %tmp_17, %empty_25" [Linear-regression-on-SOC/source.cpp:53]   --->   Operation 360 'fsub' 'tmp_20' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 55 <SV = 31> <Delay = 7.25>
+ST_55 : Operation 361 [2/5] (7.25ns)   --->   "%tmp_18 = fsub float %tmp_14, %empty_26" [Linear-regression-on-SOC/source.cpp:52]   --->   Operation 361 'fsub' 'tmp_18' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_55 : Operation 362 [2/5] (7.25ns)   --->   "%tmp_20 = fsub float %tmp_17, %empty_25" [Linear-regression-on-SOC/source.cpp:53]   --->   Operation 362 'fsub' 'tmp_20' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 56 <SV = 32> <Delay = 7.25>
+ST_56 : Operation 363 [1/5] (7.25ns)   --->   "%tmp_18 = fsub float %tmp_14, %empty_26" [Linear-regression-on-SOC/source.cpp:52]   --->   Operation 363 'fsub' 'tmp_18' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_56 : Operation 364 [1/5] (7.25ns)   --->   "%tmp_20 = fsub float %tmp_17, %empty_25" [Linear-regression-on-SOC/source.cpp:53]   --->   Operation 364 'fsub' 'tmp_20' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 57 <SV = 33> <Delay = 5.70>
+ST_57 : Operation 365 [4/4] (5.70ns)   --->   "%tmp_19 = fmul float %tmp_18, 0.000000e+00" [Linear-regression-on-SOC/source.cpp:52]   --->   Operation 365 'fmul' 'tmp_19' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_57 : Operation 366 [4/4] (5.70ns)   --->   "%tmp_21 = fmul float %tmp_20, 0.000000e+00" [Linear-regression-on-SOC/source.cpp:53]   --->   Operation 366 'fmul' 'tmp_21' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 58 <SV = 34> <Delay = 5.70>
+ST_58 : Operation 367 [3/4] (5.70ns)   --->   "%tmp_19 = fmul float %tmp_18, 0.000000e+00" [Linear-regression-on-SOC/source.cpp:52]   --->   Operation 367 'fmul' 'tmp_19' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_58 : Operation 368 [3/4] (5.70ns)   --->   "%tmp_21 = fmul float %tmp_20, 0.000000e+00" [Linear-regression-on-SOC/source.cpp:53]   --->   Operation 368 'fmul' 'tmp_21' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 59 <SV = 35> <Delay = 5.70>
+ST_59 : Operation 369 [2/4] (5.70ns)   --->   "%tmp_19 = fmul float %tmp_18, 0.000000e+00" [Linear-regression-on-SOC/source.cpp:52]   --->   Operation 369 'fmul' 'tmp_19' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_59 : Operation 370 [2/4] (5.70ns)   --->   "%tmp_21 = fmul float %tmp_20, 0.000000e+00" [Linear-regression-on-SOC/source.cpp:53]   --->   Operation 370 'fmul' 'tmp_21' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 60 <SV = 36> <Delay = 5.70>
+ST_60 : Operation 371 [1/4] (5.70ns)   --->   "%tmp_19 = fmul float %tmp_18, 0.000000e+00" [Linear-regression-on-SOC/source.cpp:52]   --->   Operation 371 'fmul' 'tmp_19' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_60 : Operation 372 [1/4] (5.70ns)   --->   "%tmp_21 = fmul float %tmp_20, 0.000000e+00" [Linear-regression-on-SOC/source.cpp:53]   --->   Operation 372 'fmul' 'tmp_21' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 61 <SV = 37> <Delay = 5.70>
+ST_61 : Operation 373 [4/4] (5.70ns)   --->   "%tmp_22 = fmul float %tmp_19, 0x3F847AE140000000" [Linear-regression-on-SOC/source.cpp:54]   --->   Operation 373 'fmul' 'tmp_22' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_61 : Operation 374 [4/4] (5.70ns)   --->   "%tmp_23 = fmul float %tmp_21, 0x3F847AE140000000" [Linear-regression-on-SOC/source.cpp:55]   --->   Operation 374 'fmul' 'tmp_23' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 62 <SV = 38> <Delay = 5.70>
+ST_62 : Operation 375 [3/4] (5.70ns)   --->   "%tmp_22 = fmul float %tmp_19, 0x3F847AE140000000" [Linear-regression-on-SOC/source.cpp:54]   --->   Operation 375 'fmul' 'tmp_22' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_62 : Operation 376 [3/4] (5.70ns)   --->   "%tmp_23 = fmul float %tmp_21, 0x3F847AE140000000" [Linear-regression-on-SOC/source.cpp:55]   --->   Operation 376 'fmul' 'tmp_23' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 63 <SV = 39> <Delay = 5.70>
+ST_63 : Operation 377 [2/4] (5.70ns)   --->   "%tmp_22 = fmul float %tmp_19, 0x3F847AE140000000" [Linear-regression-on-SOC/source.cpp:54]   --->   Operation 377 'fmul' 'tmp_22' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_63 : Operation 378 [2/4] (5.70ns)   --->   "%tmp_23 = fmul float %tmp_21, 0x3F847AE140000000" [Linear-regression-on-SOC/source.cpp:55]   --->   Operation 378 'fmul' 'tmp_23' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 64 <SV = 40> <Delay = 5.70>
+ST_64 : Operation 379 [1/4] (5.70ns)   --->   "%tmp_22 = fmul float %tmp_19, 0x3F847AE140000000" [Linear-regression-on-SOC/source.cpp:54]   --->   Operation 379 'fmul' 'tmp_22' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_64 : Operation 380 [1/4] (5.70ns)   --->   "%tmp_23 = fmul float %tmp_21, 0x3F847AE140000000" [Linear-regression-on-SOC/source.cpp:55]   --->   Operation 380 'fmul' 'tmp_23' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 106 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 65 <SV = 41> <Delay = 7.25>
+ST_65 : Operation 381 [5/5] (7.25ns)   --->   "%theta_0 = fsub float %empty_23, %tmp_22" [Linear-regression-on-SOC/source.cpp:54]   --->   Operation 381 'fsub' 'theta_0' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_65 : Operation 382 [5/5] (7.25ns)   --->   "%theta_1 = fsub float %empty_22, %tmp_23" [Linear-regression-on-SOC/source.cpp:55]   --->   Operation 382 'fsub' 'theta_1' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 66 <SV = 42> <Delay = 7.25>
+ST_66 : Operation 383 [4/5] (7.25ns)   --->   "%theta_0 = fsub float %empty_23, %tmp_22" [Linear-regression-on-SOC/source.cpp:54]   --->   Operation 383 'fsub' 'theta_0' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_66 : Operation 384 [4/5] (7.25ns)   --->   "%theta_1 = fsub float %empty_22, %tmp_23" [Linear-regression-on-SOC/source.cpp:55]   --->   Operation 384 'fsub' 'theta_1' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 67 <SV = 43> <Delay = 7.25>
+ST_67 : Operation 385 [3/5] (7.25ns)   --->   "%theta_0 = fsub float %empty_23, %tmp_22" [Linear-regression-on-SOC/source.cpp:54]   --->   Operation 385 'fsub' 'theta_0' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_67 : Operation 386 [3/5] (7.25ns)   --->   "%theta_1 = fsub float %empty_22, %tmp_23" [Linear-regression-on-SOC/source.cpp:55]   --->   Operation 386 'fsub' 'theta_1' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 68 <SV = 44> <Delay = 7.25>
+ST_68 : Operation 387 [2/5] (7.25ns)   --->   "%theta_0 = fsub float %empty_23, %tmp_22" [Linear-regression-on-SOC/source.cpp:54]   --->   Operation 387 'fsub' 'theta_0' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_68 : Operation 388 [2/5] (7.25ns)   --->   "%theta_1 = fsub float %empty_22, %tmp_23" [Linear-regression-on-SOC/source.cpp:55]   --->   Operation 388 'fsub' 'theta_1' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 69 <SV = 45> <Delay = 7.25>
+ST_69 : Operation 389 [1/5] (7.25ns)   --->   "%theta_0 = fsub float %empty_23, %tmp_22" [Linear-regression-on-SOC/source.cpp:54]   --->   Operation 389 'fsub' 'theta_0' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_69 : Operation 390 [1/5] (7.25ns)   --->   "%theta_1 = fsub float %empty_22, %tmp_23" [Linear-regression-on-SOC/source.cpp:55]   --->   Operation 390 'fsub' 'theta_1' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 105 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_69 : Operation 391 [1/1] (0.00ns)   --->   "br label %.preheader67" [Linear-regression-on-SOC/source.cpp:32]   --->   Operation 391 'br' <Predicate = true> <Delay = 0.00>
+
+State 70 <SV = 18> <Delay = 1.93>
+ST_70 : Operation 392 [1/1] (0.00ns)   --->   "%phi_ln65 = phi i2 [ %add_ln65, %burstwrite.region ], [ 0, %burst.wr.header.preheader ]" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 392 'phi' 'phi_ln65' <Predicate = true> <Delay = 0.00>
+ST_70 : Operation 393 [1/1] (0.95ns)   --->   "%icmp_ln65 = icmp eq i2 %phi_ln65, -2" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 393 'icmp' 'icmp_ln65' <Predicate = true> <Delay = 0.95> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.48> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_70 : Operation 394 [1/1] (0.00ns)   --->   "%empty_33 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 2, i64 2, i64 2) nounwind"   --->   Operation 394 'speclooptripcount' 'empty_33' <Predicate = true> <Delay = 0.00>
+ST_70 : Operation 395 [1/1] (1.56ns)   --->   "%add_ln65 = add i2 %phi_ln65, 1" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 395 'add' 'add_ln65' <Predicate = true> <Delay = 1.56> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_70 : Operation 396 [1/1] (0.00ns)   --->   "br i1 %icmp_ln65, label %memcpy.tail, label %burstwrite.region" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 396 'br' <Predicate = true> <Delay = 0.00>
+ST_70 : Operation 397 [1/1] (0.00ns)   --->   "%trunc_ln65 = trunc i2 %phi_ln65 to i1" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 397 'trunc' 'trunc_ln65' <Predicate = (!icmp_ln65)> <Delay = 0.00>
+ST_70 : Operation 398 [1/1] (0.69ns)   --->   "%select_ln65 = select i1 %trunc_ln65, float %theta_1_2, float %theta_0_2" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 398 'select' 'select_ln65' <Predicate = (!icmp_ln65)> <Delay = 0.69> <Core = "Sel">   --->   Core 26 'Sel' <Latency = 0> <II = 1> <Delay = 0.69> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+
+State 71 <SV = 19> <Delay = 8.75>
+ST_71 : Operation 399 [1/1] (0.00ns)   --->   "%burstwrite_rbegin = call i32 (...)* @_ssdm_op_SpecRegionBegin([18 x i8]* @burstwrite_OC_region) nounwind" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 399 'specregionbegin' 'burstwrite_rbegin' <Predicate = (!icmp_ln65)> <Delay = 0.00>
+ST_71 : Operation 400 [1/1] (0.00ns)   --->   "%empty_34 = call i32 (...)* @_ssdm_op_SpecPipeline(i32 1, i32 1, i32 1, i32 0, [1 x i8]* @p_str6) nounwind" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 400 'specpipeline' 'empty_34' <Predicate = (!icmp_ln65)> <Delay = 0.00>
+ST_71 : Operation 401 [1/1] (0.00ns)   --->   "%empty_35 = call i32 (...)* @_ssdm_op_SpecLoopName([24 x i8]* @memcpy_OC_output_OC_s) nounwind" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 401 'specloopname' 'empty_35' <Predicate = (!icmp_ln65)> <Delay = 0.00>
+ST_71 : Operation 402 [1/1] (8.75ns)   --->   "call void @_ssdm_op_Write.m_axi.floatP(float* %gmem_addr, float %select_ln65, i4 -1)" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 402 'write' <Predicate = (!icmp_ln65)> <Delay = 8.75> <Core = "m_axi">   --->   Core 9 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_71 : Operation 403 [1/1] (0.00ns)   --->   "%burstwrite_rend = call i32 (...)* @_ssdm_op_SpecRegionEnd([18 x i8]* @burstwrite_OC_region, i32 %burstwrite_rbegin) nounwind" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 403 'specregionend' 'burstwrite_rend' <Predicate = (!icmp_ln65)> <Delay = 0.00>
+ST_71 : Operation 404 [1/1] (0.00ns)   --->   "br label %burst.wr.header" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 404 'br' <Predicate = (!icmp_ln65)> <Delay = 0.00>
+
+State 72 <SV = 19> <Delay = 8.75>
+ST_72 : Operation 405 [5/5] (8.75ns)   --->   "%gmem_addr_wr_resp = call i1 @_ssdm_op_WriteResp.m_axi.floatP(float* %gmem_addr)" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 405 'writeresp' 'gmem_addr_wr_resp' <Predicate = true> <Delay = 8.75> <Core = "m_axi">   --->   Core 9 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 73 <SV = 20> <Delay = 8.75>
+ST_73 : Operation 406 [4/5] (8.75ns)   --->   "%gmem_addr_wr_resp = call i1 @_ssdm_op_WriteResp.m_axi.floatP(float* %gmem_addr)" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 406 'writeresp' 'gmem_addr_wr_resp' <Predicate = true> <Delay = 8.75> <Core = "m_axi">   --->   Core 9 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 74 <SV = 21> <Delay = 8.75>
+ST_74 : Operation 407 [3/5] (8.75ns)   --->   "%gmem_addr_wr_resp = call i1 @_ssdm_op_WriteResp.m_axi.floatP(float* %gmem_addr)" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 407 'writeresp' 'gmem_addr_wr_resp' <Predicate = true> <Delay = 8.75> <Core = "m_axi">   --->   Core 9 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 75 <SV = 22> <Delay = 8.75>
+ST_75 : Operation 408 [2/5] (8.75ns)   --->   "%gmem_addr_wr_resp = call i1 @_ssdm_op_WriteResp.m_axi.floatP(float* %gmem_addr)" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 408 'writeresp' 'gmem_addr_wr_resp' <Predicate = true> <Delay = 8.75> <Core = "m_axi">   --->   Core 9 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 76 <SV = 23> <Delay = 8.75>
+ST_76 : Operation 409 [1/5] (8.75ns)   --->   "%gmem_addr_wr_resp = call i1 @_ssdm_op_WriteResp.m_axi.floatP(float* %gmem_addr)" [Linear-regression-on-SOC/source.cpp:65]   --->   Operation 409 'writeresp' 'gmem_addr_wr_resp' <Predicate = true> <Delay = 8.75> <Core = "m_axi">   --->   Core 9 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_76 : Operation 410 [1/1] (0.00ns)   --->   "ret void" [Linear-regression-on-SOC/source.cpp:66]   --->   Operation 410 'ret' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 1.25ns.
+
+ <State 1>: 1ns
+The critical path consists of the following:
+	s_axi read on port 'output_r' [4]  (1 ns)
+
+ <State 2>: 8.75ns
+The critical path consists of the following:
+	'getelementptr' operation ('gmem_addr_1') [11]  (0 ns)
+	bus request on port 'gmem' (Linear-regression-on-SOC/source.cpp:8) [22]  (8.75 ns)
+
+ <State 3>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (Linear-regression-on-SOC/source.cpp:8) [22]  (8.75 ns)
+
+ <State 4>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (Linear-regression-on-SOC/source.cpp:8) [22]  (8.75 ns)
+
+ <State 5>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (Linear-regression-on-SOC/source.cpp:8) [22]  (8.75 ns)
+
+ <State 6>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (Linear-regression-on-SOC/source.cpp:8) [22]  (8.75 ns)
+
+ <State 7>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (Linear-regression-on-SOC/source.cpp:8) [22]  (8.75 ns)
+
+ <State 8>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (Linear-regression-on-SOC/source.cpp:8) [22]  (8.75 ns)
+
+ <State 9>: 1.92ns
+The critical path consists of the following:
+	'phi' operation ('phi_ln8', Linear-regression-on-SOC/source.cpp:8) with incoming values : ('add_ln8', Linear-regression-on-SOC/source.cpp:8) [25]  (0 ns)
+	'add' operation ('add_ln8', Linear-regression-on-SOC/source.cpp:8) [28]  (1.92 ns)
+
+ <State 10>: 8.75ns
+The critical path consists of the following:
+	bus read on port 'gmem' (Linear-regression-on-SOC/source.cpp:8) [35]  (8.75 ns)
+
+ <State 11>: 3.25ns
+The critical path consists of the following:
+	'getelementptr' operation ('x_input_addr', Linear-regression-on-SOC/source.cpp:8) [36]  (0 ns)
+	'store' operation ('store_ln8', Linear-regression-on-SOC/source.cpp:8) of variable 'gmem_addr_1_read', Linear-regression-on-SOC/source.cpp:8 on array 'x_input', Linear-regression-on-SOC/source.cpp:7 [37]  (3.25 ns)
+
+ <State 12>: 1.77ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation ('phi_ln11', Linear-regression-on-SOC/source.cpp:11) with incoming values : ('xor_ln11', Linear-regression-on-SOC/source.cpp:11) [45]  (1.77 ns)
+
+ <State 13>: 1.77ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation ('phi_ln12', Linear-regression-on-SOC/source.cpp:12) with incoming values : ('add_ln12', Linear-regression-on-SOC/source.cpp:12) [59]  (1.77 ns)
+
+ <State 14>: 1.87ns
+The critical path consists of the following:
+	'phi' operation ('phi_ln12', Linear-regression-on-SOC/source.cpp:12) with incoming values : ('add_ln12', Linear-regression-on-SOC/source.cpp:12) [59]  (0 ns)
+	'add' operation ('add_ln12', Linear-regression-on-SOC/source.cpp:12) [60]  (1.87 ns)
+
+ <State 15>: 3.44ns
+The critical path consists of the following:
+	'icmp' operation ('icmp_ln12', Linear-regression-on-SOC/source.cpp:12) [74]  (1.49 ns)
+	blocking operation 1.96 ns on control path)
+
+ <State 16>: 1.87ns
+The critical path consists of the following:
+	'phi' operation ('phi_mul', Linear-regression-on-SOC/source.cpp:13) with incoming values : ('add_ln13_3', Linear-regression-on-SOC/source.cpp:13) [81]  (0 ns)
+	'add' operation ('add_ln13_3', Linear-regression-on-SOC/source.cpp:13) [83]  (1.87 ns)
+
+ <State 17>: 5.12ns
+The critical path consists of the following:
+	'phi' operation ('phi_ln13_1', Linear-regression-on-SOC/source.cpp:13) with incoming values : ('add_ln13_1', Linear-regression-on-SOC/source.cpp:13) [88]  (0 ns)
+	'add' operation ('add_ln13_2', Linear-regression-on-SOC/source.cpp:13) [91]  (1.87 ns)
+	'getelementptr' operation ('data1_addr', Linear-regression-on-SOC/source.cpp:13) [93]  (0 ns)
+	'store' operation ('store_ln13', Linear-regression-on-SOC/source.cpp:13) of constant 0 on array 'data1', Linear-regression-on-SOC/source.cpp:13 [94]  (3.25 ns)
+
+ <State 18>: 3.25ns
+The critical path consists of the following:
+	'phi' operation ('phi_ln14', Linear-regression-on-SOC/source.cpp:14) with incoming values : ('add_ln14', Linear-regression-on-SOC/source.cpp:14) [105]  (0 ns)
+	'getelementptr' operation ('y_addr', Linear-regression-on-SOC/source.cpp:14) [108]  (0 ns)
+	'store' operation ('store_ln14', Linear-regression-on-SOC/source.cpp:14) of constant 0 on array 'y', Linear-regression-on-SOC/source.cpp:14 [109]  (3.25 ns)
+
+ <State 19>: 5.17ns
+The critical path consists of the following:
+	'phi' operation ('i') with incoming values : ('i', Linear-regression-on-SOC/source.cpp:15) [117]  (0 ns)
+	'add' operation ('add_ln21', Linear-regression-on-SOC/source.cpp:21) [132]  (1.92 ns)
+	'getelementptr' operation ('x_input_addr_2', Linear-regression-on-SOC/source.cpp:19) [139]  (0 ns)
+	'load' operation ('x_input_load_1', Linear-regression-on-SOC/source.cpp:19) on array 'x_input', Linear-regression-on-SOC/source.cpp:7 [140]  (3.25 ns)
+
+ <State 20>: 6.51ns
+The critical path consists of the following:
+	'load' operation ('x_input_load', Linear-regression-on-SOC/source.cpp:18) on array 'x_input', Linear-regression-on-SOC/source.cpp:7 [137]  (3.25 ns)
+	'store' operation ('store_ln18', Linear-regression-on-SOC/source.cpp:18) of variable 'x_input_load', Linear-regression-on-SOC/source.cpp:18 on array 'data', Linear-regression-on-SOC/source.cpp:12 [138]  (3.25 ns)
+
+ <State 21>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (Linear-regression-on-SOC/source.cpp:65) [239]  (8.75 ns)
+
+ <State 22>: 5.17ns
+The critical path consists of the following:
+	'phi' operation ('i') with incoming values : ('i', Linear-regression-on-SOC/source.cpp:35) [163]  (0 ns)
+	'add' operation ('add_ln38', Linear-regression-on-SOC/source.cpp:38) [172]  (1.92 ns)
+	'getelementptr' operation ('data1_addr_4', Linear-regression-on-SOC/source.cpp:38) [174]  (0 ns)
+	'load' operation ('data1_load_1', Linear-regression-on-SOC/source.cpp:38) on array 'data1', Linear-regression-on-SOC/source.cpp:13 [180]  (3.25 ns)
+
+ <State 23>: 3.25ns
+The critical path consists of the following:
+	'load' operation ('data1_load', Linear-regression-on-SOC/source.cpp:37) on array 'data1', Linear-regression-on-SOC/source.cpp:13 [175]  (3.25 ns)
+
+ <State 24>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_3', Linear-regression-on-SOC/source.cpp:37) [178]  (5.7 ns)
+
+ <State 25>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_3', Linear-regression-on-SOC/source.cpp:37) [178]  (5.7 ns)
+
+ <State 26>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_3', Linear-regression-on-SOC/source.cpp:37) [178]  (5.7 ns)
+
+ <State 27>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_3', Linear-regression-on-SOC/source.cpp:37) [178]  (5.7 ns)
+
+ <State 28>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_4', Linear-regression-on-SOC/source.cpp:37) [179]  (7.26 ns)
+
+ <State 29>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_4', Linear-regression-on-SOC/source.cpp:37) [179]  (7.26 ns)
+
+ <State 30>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_4', Linear-regression-on-SOC/source.cpp:37) [179]  (7.26 ns)
+
+ <State 31>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_4', Linear-regression-on-SOC/source.cpp:37) [179]  (7.26 ns)
+
+ <State 32>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_4', Linear-regression-on-SOC/source.cpp:37) [179]  (7.26 ns)
+
+ <State 33>: 5.7ns
+The critical path consists of the following:
+	'phi' operation ('empty_28', Linear-regression-on-SOC/source.cpp:46) with incoming values : ('tmp_13', Linear-regression-on-SOC/source.cpp:46) [187]  (0 ns)
+	'fmul' operation ('tmp_16', Linear-regression-on-SOC/source.cpp:50) [227]  (5.7 ns)
+
+ <State 34>: 3.25ns
+The critical path consists of the following:
+	'load' operation ('data1_load_2', Linear-regression-on-SOC/source.cpp:43) on array 'data1', Linear-regression-on-SOC/source.cpp:13 [209]  (3.25 ns)
+
+ <State 35>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_7', Linear-regression-on-SOC/source.cpp:43) [211]  (5.7 ns)
+
+ <State 36>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_7', Linear-regression-on-SOC/source.cpp:43) [211]  (5.7 ns)
+
+ <State 37>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_7', Linear-regression-on-SOC/source.cpp:43) [211]  (5.7 ns)
+
+ <State 38>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_7', Linear-regression-on-SOC/source.cpp:43) [211]  (5.7 ns)
+
+ <State 39>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_8', Linear-regression-on-SOC/source.cpp:43) [212]  (7.26 ns)
+
+ <State 40>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_8', Linear-regression-on-SOC/source.cpp:43) [212]  (7.26 ns)
+
+ <State 41>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_8', Linear-regression-on-SOC/source.cpp:43) [212]  (7.26 ns)
+
+ <State 42>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_8', Linear-regression-on-SOC/source.cpp:43) [212]  (7.26 ns)
+
+ <State 43>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_8', Linear-regression-on-SOC/source.cpp:43) [212]  (7.26 ns)
+
+ <State 44>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_1', Linear-regression-on-SOC/source.cpp:49) [223]  (5.7 ns)
+
+ <State 45>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_1', Linear-regression-on-SOC/source.cpp:49) [223]  (5.7 ns)
+
+ <State 46>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_1', Linear-regression-on-SOC/source.cpp:49) [223]  (5.7 ns)
+
+ <State 47>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_14', Linear-regression-on-SOC/source.cpp:49) [225]  (7.26 ns)
+
+ <State 48>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_14', Linear-regression-on-SOC/source.cpp:49) [225]  (7.26 ns)
+
+ <State 49>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_14', Linear-regression-on-SOC/source.cpp:49) [225]  (7.26 ns)
+
+ <State 50>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_14', Linear-regression-on-SOC/source.cpp:49) [225]  (7.26 ns)
+
+ <State 51>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_14', Linear-regression-on-SOC/source.cpp:49) [225]  (7.26 ns)
+
+ <State 52>: 7.26ns
+The critical path consists of the following:
+	'fsub' operation ('tmp_18', Linear-regression-on-SOC/source.cpp:52) [229]  (7.26 ns)
+
+ <State 53>: 7.26ns
+The critical path consists of the following:
+	'fsub' operation ('tmp_18', Linear-regression-on-SOC/source.cpp:52) [229]  (7.26 ns)
+
+ <State 54>: 7.26ns
+The critical path consists of the following:
+	'fsub' operation ('tmp_18', Linear-regression-on-SOC/source.cpp:52) [229]  (7.26 ns)
+
+ <State 55>: 7.26ns
+The critical path consists of the following:
+	'fsub' operation ('tmp_18', Linear-regression-on-SOC/source.cpp:52) [229]  (7.26 ns)
+
+ <State 56>: 7.26ns
+The critical path consists of the following:
+	'fsub' operation ('tmp_18', Linear-regression-on-SOC/source.cpp:52) [229]  (7.26 ns)
+
+ <State 57>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_19', Linear-regression-on-SOC/source.cpp:52) [230]  (5.7 ns)
+
+ <State 58>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_19', Linear-regression-on-SOC/source.cpp:52) [230]  (5.7 ns)
+
+ <State 59>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_19', Linear-regression-on-SOC/source.cpp:52) [230]  (5.7 ns)
+
+ <State 60>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_19', Linear-regression-on-SOC/source.cpp:52) [230]  (5.7 ns)
+
+ <State 61>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_22', Linear-regression-on-SOC/source.cpp:54) [233]  (5.7 ns)
+
+ <State 62>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_22', Linear-regression-on-SOC/source.cpp:54) [233]  (5.7 ns)
+
+ <State 63>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_22', Linear-regression-on-SOC/source.cpp:54) [233]  (5.7 ns)
+
+ <State 64>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp_22', Linear-regression-on-SOC/source.cpp:54) [233]  (5.7 ns)
+
+ <State 65>: 7.26ns
+The critical path consists of the following:
+	'fsub' operation ('theta[0]', Linear-regression-on-SOC/source.cpp:54) [234]  (7.26 ns)
+
+ <State 66>: 7.26ns
+The critical path consists of the following:
+	'fsub' operation ('theta[0]', Linear-regression-on-SOC/source.cpp:54) [234]  (7.26 ns)
+
+ <State 67>: 7.26ns
+The critical path consists of the following:
+	'fsub' operation ('theta[0]', Linear-regression-on-SOC/source.cpp:54) [234]  (7.26 ns)
+
+ <State 68>: 7.26ns
+The critical path consists of the following:
+	'fsub' operation ('theta[0]', Linear-regression-on-SOC/source.cpp:54) [234]  (7.26 ns)
+
+ <State 69>: 7.26ns
+The critical path consists of the following:
+	'fsub' operation ('theta[0]', Linear-regression-on-SOC/source.cpp:54) [234]  (7.26 ns)
+
+ <State 70>: 1.94ns
+The critical path consists of the following:
+	'icmp' operation ('icmp_ln65', Linear-regression-on-SOC/source.cpp:65) [243]  (0.959 ns)
+	blocking operation 0.978 ns on control path)
+
+ <State 71>: 8.75ns
+The critical path consists of the following:
+	bus write on port 'gmem' (Linear-regression-on-SOC/source.cpp:65) [253]  (8.75 ns)
+
+ <State 72>: 8.75ns
+The critical path consists of the following:
+	bus access on port 'gmem' (Linear-regression-on-SOC/source.cpp:65) [257]  (8.75 ns)
+
+ <State 73>: 8.75ns
+The critical path consists of the following:
+	bus access on port 'gmem' (Linear-regression-on-SOC/source.cpp:65) [257]  (8.75 ns)
+
+ <State 74>: 8.75ns
+The critical path consists of the following:
+	bus access on port 'gmem' (Linear-regression-on-SOC/source.cpp:65) [257]  (8.75 ns)
+
+ <State 75>: 8.75ns
+The critical path consists of the following:
+	bus access on port 'gmem' (Linear-regression-on-SOC/source.cpp:65) [257]  (8.75 ns)
+
+ <State 76>: 8.75ns
+The critical path consists of the following:
+	bus access on port 'gmem' (Linear-regression-on-SOC/source.cpp:65) [257]  (8.75 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+	State 11
+	State 12
+	State 13
+	State 14
+	State 15
+	State 16
+	State 17
+	State 18
+	State 19
+	State 20
+	State 21
+	State 22
+	State 23
+	State 24
+	State 25
+	State 26
+	State 27
+	State 28
+	State 29
+	State 30
+	State 31
+	State 32
+	State 33
+	State 34
+	State 35
+	State 36
+	State 37
+	State 38
+	State 39
+	State 40
+	State 41
+	State 42
+	State 43
+	State 44
+	State 45
+	State 46
+	State 47
+	State 48
+	State 49
+	State 50
+	State 51
+	State 52
+	State 53
+	State 54
+	State 55
+	State 56
+	State 57
+	State 58
+	State 59
+	State 60
+	State 61
+	State 62
+	State 63
+	State 64
+	State 65
+	State 66
+	State 67
+	State 68
+	State 69
+	State 70
+	State 71
+	State 72
+	State 73
+	State 74
+	State 75
+	State 76
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

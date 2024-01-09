@@ -1,0 +1,127 @@
+==============================================================
+Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2019.1 (64-bit)
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [SYN 201-201] Setting up clock 'default' with an uncertainty of 1.25ns.
+INFO: [HLS 200-10] Setting target device to 'xc7z020-clg484-1'
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [SCHED 204-61] Option 'relax_ii_for_timing' is enabled, will increase II to preserve clock frequency constraints.
+INFO: [HLS 200-10] Analyzing design file 'Linear-regression-on-SOC/source.cpp' ... 
+ERROR: [HLS 200-70] Compilation errors found: In file included from Linear-regression-on-SOC/source.cpp:1:
+Linear-regression-on-SOC/source.cpp:65:24: error: use of undeclared identifier 'ans'; did you mean 'abs'?
+ memcpy((float*)output,ans,2*sizeof(float));
+                       ^~~
+                       abs
+D:/Xilinx/Vivado/2019.1/win64/tools/clang/bin/../lib/clang/3.1/../../../x86_64-w64-mingw32/include\stdlib.h:330:7: note: 'abs' declared here
+  int abs(int _X);
+      ^
+In file included from Linear-regression-on-SOC/source.cpp:1:
+Linear-regression-on-SOC/source.cpp:65:2: error: no matching function for call to 'memcpy'
+ memcpy((float*)output,ans,2*sizeof(float));
+ ^~~~~~
+D:/Xilinx/Vivado/2019.1/win64/tools/clang/bin/../lib/clang/3.1/../../../x86_64-w64-mingw32/include\wchar.h:840:10: note: candidate function not viable: no known conversion from 'int (int)' to 'const void *restrict' for 2nd argument; 
+  void * memcpy(void * __restrict__ _Dst,const void * __restrict__ _Src,size_t _MaxCount) ;
+         ^
+In file included from Linear-regression-on-SOC/source.cpp:1:
+Linear-regression-on-SOC/source.cpp:63:3: warning: array index 1500 is past the end of the array (which contains 1500 elements) [-Warray-bounds]
+  j_data[1500] = 1/(2*97)*s;
+  ^      ~~~~
+Linear-regression-on-SOC/source.cpp:31:2: note: array 'j_data' declared here
+ float j_data[1500]={};
+ ^
+1 warning and 2 errors generated.
+==============================================================
+Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2019.1 (64-bit)
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [SYN 201-201] Setting up clock 'default' with an uncertainty of 1.25ns.
+INFO: [HLS 200-10] Setting target device to 'xc7z020-clg484-1'
+INFO: [SCHED 204-61] Option 'relax_ii_for_timing' is enabled, will increase II to preserve clock frequency constraints.
+INFO: [HLS 200-10] Analyzing design file 'Linear-regression-on-SOC/source.cpp' ... 
+ERROR: [HLS 200-70] Compilation errors found: In file included from Linear-regression-on-SOC/source.cpp:1:
+Linear-regression-on-SOC/source.cpp:65:24: error: use of undeclared identifier 'ans'; did you mean 'abs'?
+ memcpy((float*)output,ans,2*sizeof(float));
+                       ^~~
+                       abs
+D:/Xilinx/Vivado/2019.1/win64/tools/clang/bin/../lib/clang/3.1/../../../x86_64-w64-mingw32/include\stdlib.h:330:7: note: 'abs' declared here
+  int abs(int _X);
+      ^
+In file included from Linear-regression-on-SOC/source.cpp:1:
+Linear-regression-on-SOC/source.cpp:65:2: error: no matching function for call to 'memcpy'
+ memcpy((float*)output,ans,2*sizeof(float));
+ ^~~~~~
+D:/Xilinx/Vivado/2019.1/win64/tools/clang/bin/../lib/clang/3.1/../../../x86_64-w64-mingw32/include\wchar.h:840:10: note: candidate function not viable: no known conversion from 'int (int)' to 'const void *restrict' for 2nd argument; 
+  void * memcpy(void * __restrict__ _Dst,const void * __restrict__ _Src,size_t _MaxCount) ;
+         ^
+2 errors generated.
+==============================================================
+Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2019.1 (64-bit)
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [SYN 201-201] Setting up clock 'default' with an uncertainty of 1.25ns.
+INFO: [HLS 200-10] Setting target device to 'xc7z020-clg484-1'
+INFO: [SCHED 204-61] Option 'relax_ii_for_timing' is enabled, will increase II to preserve clock frequency constraints.
+INFO: [HLS 200-10] Analyzing design file 'Linear-regression-on-SOC/source.cpp' ... 
+INFO: [HLS 200-111] Finished Linking Time (s): cpu = 00:00:02 ; elapsed = 00:00:48 . Memory (MB): peak = 183.879 ; gain = 93.723
+INFO: [HLS 200-111] Finished Checking Pragmas Time (s): cpu = 00:00:02 ; elapsed = 00:00:48 . Memory (MB): peak = 183.879 ; gain = 93.723
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms Time (s): cpu = 00:00:02 ; elapsed = 00:00:52 . Memory (MB): peak = 183.879 ; gain = 93.723
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability Time (s): cpu = 00:00:02 ; elapsed = 00:00:53 . Memory (MB): peak = 183.879 ; gain = 93.723
+INFO: [XFORM 203-102] Automatically partitioning small array 'theta' (Linear-regression-on-SOC/source.cpp:11) completely based on array size.
+INFO: [XFORM 203-101] Partitioning array 'theta' (Linear-regression-on-SOC/source.cpp:11) in dimension 1 completely.
+INFO: [HLS 200-111] Finished Pre-synthesis Time (s): cpu = 00:00:02 ; elapsed = 00:00:55 . Memory (MB): peak = 183.879 ; gain = 93.723
+WARNING: [HLS 200-466] Port 'output'() has different latency/depth on the same m_axi bundle:'gmem'
+INFO: [HLS 200-444] Inferring multiple bus burst read of a total cumulative length 194 on port 'gmem' (Linear-regression-on-SOC/source.cpp:8:2). These data requests might be further partitioned to multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.
+INFO: [HLS 200-444] Inferring multiple bus burst write of a total cumulative length 2 on port 'gmem' (Linear-regression-on-SOC/source.cpp:65:2). These data requests might be further partitioned to multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.
+INFO: [HLS 200-111] Finished Architecture Synthesis Time (s): cpu = 00:00:02 ; elapsed = 00:00:57 . Memory (MB): peak = 183.879 ; gain = 93.723
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'linear_regression' ...
+WARNING: [SYN 201-107] Renaming port name 'linear_regression/input' to 'linear_regression/input_r' to avoid the conflict with HDL keywords or other object names.
+WARNING: [SYN 201-107] Renaming port name 'linear_regression/output' to 'linear_regression/output_r' to avoid the conflict with HDL keywords or other object names.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'linear_regression' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'memcpy.x_input.input'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 3.
+INFO: [SCHED 204-61] Pipelining loop 'memcpy.output.theta.gep'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 2.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 58.228 seconds; current allocated memory: 112.605 MB.
+INFO: [HLS 200-434] Only 2 loops out of a total 12 loops have been pipelined in this design.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.632 seconds; current allocated memory: 113.619 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'linear_regression' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'linear_regression/gmem' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'linear_regression/input_r' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'linear_regression/output_r' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'linear_regression' to 's_axilite & ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Bundling port 'return' and 'output_r' to AXI-Lite port AXILiteS.
+INFO: [SYN 201-210] Renamed object name 'linear_regression_x_input' to 'linear_regressionbkb' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'linear_regression_data' to 'linear_regressioncud' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'linear_regression_data1' to 'linear_regressiondEe' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'linear_regression_faddfsub_32ns_32ns_32_5_full_dsp_1' to 'linear_regressioneOg' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'linear_regression_fadd_32ns_32ns_32_5_full_dsp_1' to 'linear_regressionfYi' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'linear_regression_fmul_32ns_32ns_32_4_max_dsp_1' to 'linear_regressiong8j' due to the length limit 20
+INFO: [RTGEN 206-100] Generating core module 'linear_regressioneOg': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'linear_regressionfYi': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'linear_regressiong8j': 4 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'linear_regression'.
+INFO: [HLS 200-111]  Elapsed time: 0.832 seconds; current allocated memory: 115.615 MB.
+INFO: [RTMG 210-278] Implementing memory 'linear_regressionbkb_ram (RAM)' using block RAMs.
+INFO: [RTMG 210-278] Implementing memory 'linear_regressioncud_ram (RAM)' using block RAMs.
+INFO: [RTMG 210-278] Implementing memory 'linear_regression_y_ram (RAM)' using block RAMs.
+INFO: [HLS 200-111] Finished generating all RTL models Time (s): cpu = 00:00:04 ; elapsed = 00:01:04 . Memory (MB): peak = 183.879 ; gain = 93.723
+INFO: [VHDL 208-304] Generating VHDL RTL for linear_regression.
+INFO: [VLOG 209-307] Generating Verilog RTL for linear_regression.
+INFO: [HLS 200-112] Total elapsed time: 64.46 seconds; peak allocated memory: 115.615 MB.
